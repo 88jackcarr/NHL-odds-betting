@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NHL Edge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b1016; --panel: #121a23; --panel2: #18222d; --line: #243241;
+    --ink: #e8eef4; --muted: #8796a6; --ice: #7cc4ff; --good: #4ade80; --bad: #f87171;
+    --gold: #fbbf24;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.5 Inter, system-ui, sans-serif; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 24px 16px 64px; }
+  header { display: flex; justify-content: space-between; align-items: flex-end;
+           flex-wrap: wrap; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+  h1 { font: 700 40px/1 "Barlow Condensed", sans-serif; letter-spacing: .5px; margin: 0; }
+  h1 span { color: var(--ice); }
+  h2 { font: 700 22px/1.2 "Barlow Condensed", sans-serif; letter-spacing: .4px;
+       text-transform: uppercase; margin: 36px 0 12px; color: var(--muted); }
+  .meta { color: var(--muted); font-size: 13px; text-align: right; }
+  .num { font-family: "JetBrains Mono", monospace; font-variant-numeric: tabular-nums; }
+  .good { color: var(--good); } .bad { color: var(--bad); } .muted { color: var(--muted); }
+  .notice { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--gold);
+            padding: 10px 14px; border-radius: 8px; margin-top: 16px; font-size: 14px; color: var(--muted); }
+
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .tile { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+  .tile .k { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .6px; }
+  .tile .v { font: 600 26px/1.2 "JetBrains Mono", monospace; margin-top: 4px; }
+
+  .games { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 12px; }
+  .game { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .game.has-pick { border-color: var(--ice); box-shadow: 0 0 0 1px var(--ice) inset; }
+  .game .top { display: flex; justify-content: space-between; color: var(--muted); font-size: 13px; }
+  .row { display: grid; grid-template-columns: 1fr 64px 64px 72px; align-items: center;
+         gap: 6px; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .row:last-of-type { border-bottom: 0; }
+  .row.head { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .5px;
+              padding-bottom: 4px; }
+  .row > :not(:first-child) { text-align: right; }
+  .team { font: 700 22px "Barlow Condensed", sans-serif; letter-spacing: .5px; }
+  .streak { font-size: 11px; color: var(--muted); margin-left: 6px; font-family: "JetBrains Mono", monospace; }
+  .pick { margin-top: 12px; background: rgba(124,196,255,.1); border-radius: 8px; padding: 10px 12px;
+          display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 14px; }
+  .pick b { color: var(--ice); }
+  .nopick { margin-top: 12px; color: var(--muted); font-size: 13px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { color: var(--muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; }
+  tr:last-child td { border-bottom: 0; }
+  td.r, th.r { text-align: right; }
+  .card th, .card td { white-space: normal; padding: 8px 6px; }
+  .two > * { min-width: 0; }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 760px) { .two { grid-template-columns: 1fr; } h1 { font-size: 32px; } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+  .card h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
+  .bar { display: grid; grid-template-columns: 120px 1fr 60px; gap: 8px; align-items: center;
+         font-size: 13px; margin: 6px 0; }
+  .bar .track { background: var(--panel2); height: 10px; border-radius: 5px; position: relative; overflow: hidden; }
+  .bar .fill { position: absolute; top: 0; bottom: 0; border-radius: 5px; }
+  .empty { color: var(--muted); padding: 16px; }
+  footer { margin-top: 48px; color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>NHL <span>EDGE</span></h1><div class="muted">Model vs. market, updated daily</div></div>
+    <div class="meta" id="meta">Loading…</div>
+  </header>
+  <div id="notices"></div>
+
+  <h2>Results</h2>
+  <div class="tiles" id="tiles"></div>
+
+  <h2>Today's board</h2>
+  <div class="games" id="games"></div>
+
+  <h2>Bet log</h2>
+  <div class="tablewrap"><table id="bets"></table></div>
+
+  <h2>Is the model any good?</h2>
+  <div class="two">
+    <div class="card" id="bt-summary"></div>
+    <div class="card" id="bt-calib"></div>
+  </div>
+  <div class="card" id="bt-features" style="margin-top:12px"></div>
+
+  <footer>
+    For research and entertainment. No model guarantees profit; sportsbooks hold a built-in margin and
+    hockey is high-variance. Closing line value (CLV) is the best early sign of a real edge.
+    Bet only what you can afford to lose, and only where it's legal for you.
+  </footer>
+</div>
+<script>
+const pct = (x, d = 1) => x == null ? "–" : (x * 100).toFixed(d) + "%";
+const odds = a => a == null ? "–" : (a > 0 ? "+" + a : "" + a);
+const signed = (x, d = 1) => x == null ? "–" : (x > 0 ? "+" : "") + x.toFixed(d);
+const cls = x => x == null ? "" : x > 0 ? "good" : x < 0 ? "bad" : "";
+const streak = s => s > 0 ? `W${s}` : s < 0 ? `L${-s}` : "";
+const FEATURE_NAMES = {
+  elo_diff: "Elo rating", gd_season_diff: "Goal diff (season)", gd_l10_diff: "Goal diff (last 10)",
+  win_l10_diff: "Win % (last 10)", streak_diff: "Win streak", rest_diff: "Rest days",
+  home_b2b: "Home back-to-back", away_b2b: "Away back-to-back", xg_season_diff: "xG share (season)",
+  xg_l10_diff: "xG share (last 10)", xg5_l10_diff: "5v5 xG share (last 10)"
+};
+
+fetch("data/site.json?" + Date.now()).then(r => r.json()).then(render).catch(() => {
+  document.getElementById("meta").textContent = "No data yet. The first daily run hasn't finished.";
+});
+
+function render(d) {
+  document.getElementById("meta").innerHTML =
+    `Updated ${d.updated}<br>${d.has_odds ? `Odds credits left: ${d.odds_credits_left ?? "?"}` : "No odds this run"}`;
+  const n = [];
+  if (!d.has_odds) n.push("No sportsbook odds were loaded, so only model probabilities are shown. Check the ODDS_API_KEY secret.");
+  if (!d.xg_used) n.push("Expected-goals data wasn't available this run; the model used goals, Elo, form, streaks and rest only.");
+  document.getElementById("notices").innerHTML = n.map(t => `<div class="notice">${t}</div>`).join("");
+
+  const r = d.record;
+  const tiles = [
+    ["Record", `${r.wins}-${r.losses}`], ["Units", signed(r.units_profit, 2), cls(r.units_profit)],
+    ["ROI", r.roi == null ? "–" : signed(r.roi * 100) + "%", cls(r.roi)],
+    ["Avg CLV", r.avg_clv == null ? "–" : signed(r.avg_clv * 100) + "%", cls(r.avg_clv)],
+    ["Beat close", pct(r.beat_close_pct, 0)], ["Pending", r.pending]
+  ];
+  document.getElementById("tiles").innerHTML = tiles.map(([k, v, c = ""]) =>
+    `<div class="tile"><div class="k">${k}</div><div class="v ${c}">${v}</div></div>`).join("");
+
+  const g = document.getElementById("games");
+  g.innerHTML = d.games.length ? d.games.map(gameCard).join("") : `<div class="empty">No games today.</div>`;
+
+  const bets = d.bets || [];
+  document.getElementById("bets").innerHTML = bets.length ? `
+    <tr><th>Date</th><th>Game</th><th>Pick</th><th class="r">Odds</th><th>Book</th>
+      <th class="r">Stake</th><th class="r">EV</th><th class="r">CLV</th><th>Result</th><th class="r">Units</th></tr>
+    ${bets.map(b => `<tr><td>${b.date}</td><td>${b.matchup}</td><td><b>${b.pick}</b></td>
+      <td class="r num">${odds(b.odds)}</td><td class="muted">${b.book}</td>
+      <td class="r num">${b.stake}u</td><td class="r num">${pct(b.ev)}</td>
+      <td class="r num ${cls(b.clv)}">${b.clv == null ? "–" : signed(b.clv * 100) + "%"}</td>
+      <td class="${b.result === "W" ? "good" : b.result === "L" ? "bad" : "muted"}">${b.result ?? "Pending"}</td>
+      <td class="r num ${cls(b.profit)}">${b.profit == null ? "" : signed(b.profit, 2)}</td></tr>`).join("")}`
+    : `<tr><td class="empty">No bets logged yet.</td></tr>`;
+
+  renderBacktest(d.backtest || {});
+}
+
+function gameCard(x) {
+  const has = x.market_home != null;
+  const side = (team, isHome) => {
+    const m = isHome ? x.model_home : 1 - x.model_home;
+    const mk = has ? (isHome ? x.market_home : 1 - x.market_home) : null;
+    const ev = has ? (isHome ? x.ev_home : x.ev_away) : null;
+    return `<div class="row"><div><span class="team">${team}</span><span class="streak">${streak(isHome ? x.home_streak : x.away_streak)}</span></div>
+      <div class="num">${pct(m, 0)}</div><div class="num muted">${pct(mk, 0)}</div>
+      <div class="num ${cls(ev)}">${has ? odds(isHome ? x.best_home : x.best_away) : "–"}</div></div>`;
+  };
+  const p = x.pick;
+  return `<div class="game ${p ? "has-pick" : ""}">
+    <div class="top"><span>${x.time}</span><span>${x.away} @ ${x.home}</span></div>
+    <div class="row head"><div>Team</div><div>Model</div><div>Market</div><div>Best</div></div>
+    ${side(x.away, false)}${side(x.home, true)}
+    ${p ? `<div class="pick"><span><b>Value: ${p.team} ${odds(p.odds)}</b> at ${p.side === "home" ? x.best_home_book : x.best_away_book}</span>
+      <span class="num">EV ${pct(p.ev)} · ${p.stake}u</span></div>`
+      : `<div class="nopick">${has ? "No edge at current prices" : "Waiting for odds"}</div>`}
+  </div>`;
+}
+
+function renderBacktest(bt) {
+  const s = document.getElementById("bt-summary");
+  if (!bt.overall) { s.innerHTML = `<h3>Backtest</h3><div class="muted">${bt.note || "Not enough history yet."}</div>`; return; }
+  const rows = [["This model", bt.overall], ["Elo only", bt.baselines.elo_only], ["Always pick home rate", bt.baselines.always_home_rate]];
+  s.innerHTML = `<h3>Backtest: predicting each season using only earlier seasons</h3>
+    <table><tr><th></th><th class="r">Log loss</th><th class="r">Accuracy</th></tr>
+    ${rows.map(([k, v]) => `<tr><td>${k}</td><td class="r num">${v.log_loss}</td><td class="r num">${pct(v.accuracy)}</td></tr>`).join("")}
+    </table><p class="muted" style="font-size:13px">Lower log loss is better. ${bt.note}</p>
+    <p style="font-size:13px"><b>Win streaks:</b> ${bt.streak_effect.helps
+      ? "adding streaks improved predictions slightly."
+      : "adding streaks did <b>not</b> improve predictions once other stats were included."}</p>`;
+
+  const c = document.getElementById("bt-calib");
+  c.innerHTML = `<h3>Calibration: predicted vs. actual win rate</h3>` + bt.calibration.map(b => `
+    <div class="bar"><span class="num">${pct(b.predicted, 0)} predicted</span>
+      <div class="track"><div class="fill" style="left:0;width:${b.actual * 100}%;background:var(--ice)"></div></div>
+      <span class="num">${pct(b.actual, 0)}</span></div>`).join("") +
+    `<p class="muted" style="font-size:13px">Well calibrated means the bars roughly match the predicted number.</p>`;
+
+  const maxW = Math.max(...bt.importance.map(f => Math.abs(f.weight)), 0.01);
+  document.getElementById("bt-features").innerHTML = `<h3>What the model leans on</h3>` + bt.importance.map(f => `
+    <div class="bar"><span>${FEATURE_NAMES[f.feature] || f.feature}</span>
+      <div class="track"><div class="fill" style="left:0;width:${Math.abs(f.weight) / maxW * 100}%;background:${f.weight >= 0 ? "var(--good)" : "var(--bad)"}"></div></div>
+      <span class="num">${signed(f.weight, 3)}</span></div>`).join("") +
+    `<p class="muted" style="font-size:13px">Standardized weights. Correlated stats share credit, so read these as rough guides.</p>`;
+}
+</script>
+</body>
+</html>

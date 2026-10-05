@@ -1,0 +1,60 @@
+name: Daily NHL picks
+
+on:
+  schedule:
+    # GitHub uses UTC. 16:00 UTC = 11:00 AM Central (10:00 AM after DST ends).
+    - cron: "0 16 * * *"     # morning: retrain, find value, log bets
+    # 22:45 UTC = 5:45 PM Central (4:45 PM after DST ends), before most puck drops.
+    - cron: "45 22 * * *"    # pre-game: near-closing lines for CLV
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "picks or close"
+        default: picks
+        type: choice
+        options: [picks, close]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-run
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: pip install -r requirements.txt
+
+      - name: Choose mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "45 22 * * *" ]; then
+            echo "mode=close" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=picks" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Run model
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python run_daily.py ${{ steps.mode.outputs.mode }}
+
+      - name: Save results
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data docs/data
+          git diff --cached --quiet || git commit -m "Daily update (${{ steps.mode.outputs.mode }})"
+          git pull --rebase
+          git push
