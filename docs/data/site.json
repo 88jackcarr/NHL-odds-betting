@@ -1,6 +1,6 @@
 {
- "updated": "Wed Oct 14, 11:20 AM CT",
- "run": "picks",
+ "updated": "Wed Oct 14, 6:04 PM CT",
+ "run": "close",
  "date": "2026-10-14",
  "has_odds": false,
  "odds_credits_left": null,
@@ -17,7 +17,7 @@
    "time": "6:30 PM",
    "home": "WSH",
    "away": "MTL",
-   "state": "FUT",
+   "state": "PRE",
    "home_streak": -2,
    "away_streak": 2,
    "model_home": 0.5463,
