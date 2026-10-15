@@ -1,7 +1,7 @@
 {
- "updated": "Wed Oct 14, 6:04 PM CT",
- "run": "close",
- "date": "2026-10-14",
+ "updated": "Thu Oct 15, 11:17 AM CT",
+ "run": "picks",
+ "date": "2026-10-15",
  "has_odds": false,
  "odds_credits_left": null,
  "xg_used": false,
@@ -13,25 +13,124 @@
  },
  "games": [
   {
-   "game_id": 2026020106,
-   "time": "6:30 PM",
-   "home": "WSH",
-   "away": "MTL",
-   "state": "PRE",
-   "home_streak": -2,
-   "away_streak": 2,
-   "model_home": 0.5463,
+   "game_id": 2026020108,
+   "time": "6:00 PM",
+   "home": "TOR",
+   "away": "BUF",
+   "state": "FUT",
+   "home_streak": -1,
+   "away_streak": -1,
+   "model_home": 0.4577,
    "pick": null
   },
   {
-   "game_id": 2026020107,
-   "time": "7:30 PM",
-   "home": "COL",
-   "away": "DAL",
+   "game_id": 2026020109,
+   "time": "6:00 PM",
+   "home": "OTT",
+   "away": "NYI",
+   "state": "FUT",
+   "home_streak": -1,
+   "away_streak": 1,
+   "model_home": 0.5705,
+   "pick": null
+  },
+  {
+   "game_id": 2026020111,
+   "time": "6:00 PM",
+   "home": "TBL",
+   "away": "SEA",
+   "state": "FUT",
+   "home_streak": -1,
+   "away_streak": 3,
+   "model_home": 0.5907,
+   "pick": null
+  },
+  {
+   "game_id": 2026020112,
+   "time": "6:00 PM",
+   "home": "FLA",
+   "away": "VAN",
    "state": "FUT",
    "home_streak": 1,
+   "away_streak": -5,
+   "model_home": 0.6622,
+   "pick": null
+  },
+  {
+   "game_id": 2026020113,
+   "time": "6:00 PM",
+   "home": "NJD",
+   "away": "NYR",
+   "state": "FUT",
+   "home_streak": 1,
+   "away_streak": 2,
+   "model_home": 0.4483,
+   "pick": null
+  },
+  {
+   "game_id": 2026020110,
+   "time": "6:30 PM",
+   "home": "DET",
+   "away": "PHI",
+   "state": "FUT",
+   "home_streak": -3,
+   "away_streak": -8,
+   "model_home": 0.5538,
+   "pick": null
+  },
+  {
+   "game_id": 2026020114,
+   "time": "7:00 PM",
+   "home": "CHI",
+   "away": "WPG",
+   "state": "FUT",
+   "home_streak": 1,
+   "away_streak": 1,
+   "model_home": 0.4259,
+   "pick": null
+  },
+  {
+   "game_id": 2026020115,
+   "time": "7:00 PM",
+   "home": "NSH",
+   "away": "SJS",
+   "state": "FUT",
+   "home_streak": -2,
    "away_streak": -2,
-   "model_home": 0.5952,
+   "model_home": 0.5915,
+   "pick": null
+  },
+  {
+   "game_id": 2026020116,
+   "time": "7:00 PM",
+   "home": "MIN",
+   "away": "STL",
+   "state": "FUT",
+   "home_streak": -1,
+   "away_streak": 2,
+   "model_home": 0.5513,
+   "pick": null
+  },
+  {
+   "game_id": 2026020117,
+   "time": "8:00 PM",
+   "home": "EDM",
+   "away": "UTA",
+   "state": "FUT",
+   "home_streak": 5,
+   "away_streak": 2,
+   "model_home": 0.5373,
+   "pick": null
+  },
+  {
+   "game_id": 2026020118,
+   "time": "9:00 PM",
+   "home": "VGK",
+   "away": "CGY",
+   "state": "FUT",
+   "home_streak": 1,
+   "away_streak": 1,
+   "model_home": 0.6819,
    "pick": null
   }
  ],
@@ -111,10 +210,10 @@
    },
    {
     "season": "2026-27",
-    "games": 105,
-    "log_loss": 0.6597,
-    "brier": 0.2337,
-    "accuracy": 0.6286
+    "games": 107,
+    "log_loss": 0.6615,
+    "brier": 0.2345,
+    "accuracy": 0.6262
    }
   ],
   "calibration": [
@@ -136,7 +235,7 @@
    {
     "predicted": 0.55,
     "actual": 0.531,
-    "games": 1798
+    "games": 1800
    },
    {
     "predicted": 0.644,
@@ -157,23 +256,23 @@
   "importance": [
    {
     "feature": "elo_diff",
-    "weight": 0.3786
+    "weight": 0.3785
    },
    {
     "feature": "gd_season_diff",
-    "weight": 0.1446
+    "weight": 0.1445
    },
    {
     "feature": "away_b2b",
-    "weight": 0.116
+    "weight": 0.1159
    },
    {
     "feature": "win_l10_diff",
-    "weight": -0.0794
+    "weight": -0.0802
    },
    {
     "feature": "home_b2b",
-    "weight": -0.0681
+    "weight": -0.0684
    },
    {
     "feature": "rest_diff",
@@ -181,11 +280,11 @@
    },
    {
     "feature": "gd_l10_diff",
-    "weight": -0.0166
+    "weight": -0.0158
    },
    {
     "feature": "streak_diff",
-    "weight": 0.0055
+    "weight": 0.0049
    }
   ],
   "note": "This measures prediction quality, not betting ROI. Free historical odds aren't available, so real ROI and closing line value are tracked going forward in the bet log."
