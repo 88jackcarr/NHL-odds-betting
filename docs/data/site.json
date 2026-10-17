@@ -1,7 +1,7 @@
 {
- "updated": "Fri Oct 16, 6:04 PM CT",
- "run": "close",
- "date": "2026-10-16",
+ "updated": "Sat Oct 17, 11:09 AM CT",
+ "run": "picks",
+ "date": "2026-10-17",
  "has_odds": false,
  "odds_credits_left": null,
  "xg_used": false,
@@ -13,25 +13,157 @@
  },
  "games": [
   {
-   "game_id": 2026020119,
-   "time": "8:00 PM",
-   "home": "COL",
-   "away": "PIT",
+   "game_id": 2026020121,
+   "time": "12:00 PM",
+   "home": "WSH",
+   "away": "NJD",
    "state": "FUT",
-   "home_streak": -1,
-   "away_streak": -1,
-   "model_home": 0.6037,
+   "home_streak": 1,
+   "away_streak": 2,
+   "model_home": 0.5995,
    "pick": null
   },
   {
-   "game_id": 2026020120,
-   "time": "9:00 PM",
-   "home": "ANA",
-   "away": "BOS",
+   "game_id": 2026020122,
+   "time": "2:30 PM",
+   "home": "WPG",
+   "away": "CAR",
    "state": "FUT",
    "home_streak": -1,
-   "away_streak": 3,
-   "model_home": 0.4647,
+   "away_streak": 6,
+   "model_home": 0.355,
+   "pick": null
+  },
+  {
+   "game_id": 2026020123,
+   "time": "3:00 PM",
+   "home": "TBL",
+   "away": "VAN",
+   "state": "FUT",
+   "home_streak": 1,
+   "away_streak": -6,
+   "model_home": 0.7074,
+   "pick": null
+  },
+  {
+   "game_id": 2026020124,
+   "time": "5:00 PM",
+   "home": "FLA",
+   "away": "SEA",
+   "state": "FUT",
+   "home_streak": 2,
+   "away_streak": -1,
+   "model_home": 0.544,
+   "pick": null
+  },
+  {
+   "game_id": 2026020125,
+   "time": "6:00 PM",
+   "home": "TOR",
+   "away": "NYI",
+   "state": "FUT",
+   "home_streak": -2,
+   "away_streak": -1,
+   "model_home": 0.5025,
+   "pick": null
+  },
+  {
+   "game_id": 2026020126,
+   "time": "6:00 PM",
+   "home": "MTL",
+   "away": "BUF",
+   "state": "FUT",
+   "home_streak": -1,
+   "away_streak": 1,
+   "model_home": 0.5286,
+   "pick": null
+  },
+  {
+   "game_id": 2026020127,
+   "time": "6:00 PM",
+   "home": "DET",
+   "away": "SJS",
+   "state": "FUT",
+   "home_streak": 1,
+   "away_streak": 1,
+   "model_home": 0.5822,
+   "pick": null
+  },
+  {
+   "game_id": 2026020128,
+   "time": "6:00 PM",
+   "home": "PHI",
+   "away": "OTT",
+   "state": "FUT",
+   "home_streak": -9,
+   "away_streak": 1,
+   "model_home": 0.4302,
+   "pick": null
+  },
+  {
+   "game_id": 2026020129,
+   "time": "6:00 PM",
+   "home": "CBJ",
+   "away": "NYR",
+   "state": "FUT",
+   "home_streak": -2,
+   "away_streak": -1,
+   "model_home": 0.5252,
+   "pick": null
+  },
+  {
+   "game_id": 2026020130,
+   "time": "6:00 PM",
+   "home": "CHI",
+   "away": "DAL",
+   "state": "FUT",
+   "home_streak": 2,
+   "away_streak": 1,
+   "model_home": 0.3519,
+   "pick": null
+  },
+  {
+   "game_id": 2026020131,
+   "time": "7:00 PM",
+   "home": "NSH",
+   "away": "STL",
+   "state": "FUT",
+   "home_streak": -3,
+   "away_streak": -1,
+   "model_home": 0.471,
+   "pick": null
+  },
+  {
+   "game_id": 2026020132,
+   "time": "8:00 PM",
+   "home": "LAK",
+   "away": "BOS",
+   "state": "FUT",
+   "home_streak": -5,
+   "away_streak": 4,
+   "model_home": 0.5347,
+   "pick": null
+  },
+  {
+   "game_id": 2026020133,
+   "time": "9:00 PM",
+   "home": "UTA",
+   "away": "EDM",
+   "state": "FUT",
+   "home_streak": 3,
+   "away_streak": -1,
+   "model_home": 0.534,
+   "pick": null
+  },
+  {
+   "game_id": 2026020134,
+   "time": "9:00 PM",
+   "home": "VGK",
+   "away": "PIT",
+   "state": "FUT",
+   "home_streak": 2,
+   "away_streak": -2,
+   "model_home": 0.6738,
    "pick": null
   }
  ],
@@ -59,9 +191,9 @@
    "away_b2b"
   ],
   "overall": {
-   "log_loss": 0.6707,
-   "brier": 0.2391,
-   "accuracy": 0.5804
+   "log_loss": 0.6706,
+   "brier": 0.239,
+   "accuracy": 0.5805
   },
   "baselines": {
    "always_home_rate": {
@@ -70,14 +202,14 @@
     "accuracy": 0.5357
    },
    "elo_only": {
-    "log_loss": 0.6722,
+    "log_loss": 0.6721,
     "brier": 0.2397,
-    "accuracy": 0.5809
+    "accuracy": 0.5811
    }
   },
   "streak_effect": {
    "log_loss_without_streaks": 0.6706,
-   "log_loss_with_streaks": 0.6707,
+   "log_loss_with_streaks": 0.6706,
    "helps": false
   },
   "per_season": [
@@ -111,10 +243,10 @@
    },
    {
     "season": "2026-27",
-    "games": 118,
-    "log_loss": 0.659,
-    "brier": 0.2334,
-    "accuracy": 0.6271
+    "games": 120,
+    "log_loss": 0.6575,
+    "brier": 0.2326,
+    "accuracy": 0.6333
    }
   ],
   "calibration": [
@@ -131,7 +263,7 @@
    {
     "predicted": 0.455,
     "actual": 0.47,
-    "games": 1382
+    "games": 1383
    },
    {
     "predicted": 0.55,
@@ -141,7 +273,7 @@
    {
     "predicted": 0.644,
     "actual": 0.637,
-    "games": 1178
+    "games": 1179
    },
    {
     "predicted": 0.74,
@@ -157,35 +289,35 @@
   "importance": [
    {
     "feature": "elo_diff",
-    "weight": 0.3823
+    "weight": 0.3827
    },
    {
     "feature": "gd_season_diff",
-    "weight": 0.1412
+    "weight": 0.1411
    },
    {
     "feature": "away_b2b",
-    "weight": 0.1154
+    "weight": 0.1157
    },
    {
     "feature": "win_l10_diff",
-    "weight": -0.0762
+    "weight": -0.0768
    },
    {
     "feature": "home_b2b",
-    "weight": -0.0686
+    "weight": -0.0688
    },
    {
     "feature": "rest_diff",
-    "weight": 0.0435
+    "weight": 0.0431
    },
    {
     "feature": "gd_l10_diff",
-    "weight": -0.0197
+    "weight": -0.0191
    },
    {
     "feature": "streak_diff",
-    "weight": 0.004
+    "weight": 0.0043
    }
   ],
   "note": "This measures prediction quality, not betting ROI. Free historical odds aren't available, so real ROI and closing line value are tracked going forward in the bet log."
