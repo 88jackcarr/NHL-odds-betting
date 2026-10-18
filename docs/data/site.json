@@ -1,6 +1,6 @@
 {
- "updated": "Sun Oct 18, 11:11 AM CT",
- "run": "picks",
+ "updated": "Sun Oct 18, 6:00 PM CT",
+ "run": "close",
  "date": "2026-10-18",
  "has_odds": false,
  "odds_credits_left": null,
@@ -17,7 +17,7 @@
    "time": "5:00 PM",
    "home": "MIN",
    "away": "CBJ",
-   "state": "FUT",
+   "state": "LIVE",
    "home_streak": 1,
    "away_streak": 1,
    "model_home": 0.6919,
