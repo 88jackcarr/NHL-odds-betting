@@ -49,11 +49,17 @@ def main(mode: str):
     print("Loading expected-goals data...")
     done = games[games["state"].isin(["FINAL", "OFF"])]
     xg = load_xg(set(games["home"]) | set(games["away"]))
-    recent = done[done["season"] >= done["season"].max() - 10001] if len(done) else done
+    reg = done[(done["game_type"] == 2) & (done["season"] >= done["season"].max() - 10001)]
     covered = set(zip(xg["game_id"].astype(int), xg["team"])) if len(xg) else set()
-    xg_cov = (sum((int(g), h) in covered for g, h in zip(recent["game_id"], recent["home"]))
-              / max(len(recent), 1))
-    diag.note(f"xG coverage of recent games: {xg_cov:.0%} (needs 90% to be used).")
+    side_rows = [(int(g), t) for g, h, a in zip(reg["game_id"], reg["home"], reg["away"])
+                 for t in (h, a)]
+    xg_cov = sum(k in covered for k in side_rows) / max(len(side_rows), 1)
+    by_team = pd.Series([k in covered for k in side_rows],
+                        index=[t for _, t in side_rows]).groupby(level=0).mean().sort_values()
+    if len(by_team) and by_team.iloc[0] < 0.9:
+        worst = ", ".join(f"{t} {v:.0%}" for t, v in by_team.head(5).items())
+        diag.note(f"xG: lowest team coverage: {worst}")
+    diag.note(f"xG coverage of recent games: {xg_cov:.0%} (needs 75% to be used).")
 
     feats = build_features(games, xg)
     features = model.choose_features(feats, xg_cov)

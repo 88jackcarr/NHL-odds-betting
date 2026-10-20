@@ -22,7 +22,7 @@ def training_rows(feats: pd.DataFrame) -> pd.DataFrame:
 
 
 def choose_features(feats: pd.DataFrame, xg_coverage: float) -> list[str]:
-    return BASE_FEATURES + (XG_FEATURES if xg_coverage >= 0.9 else [])
+    return BASE_FEATURES + (XG_FEATURES if xg_coverage >= 0.75 else [])
 
 
 def fit(train: pd.DataFrame, features: list[str]):
