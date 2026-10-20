@@ -1,5 +1,5 @@
 logged_at,date,game_id,matchup,pick,side,book,odds,model_prob,market_prob,prob,ev,stake,goalies,close_fair,clv,result,profit
-2026-10-20 14:26,2026-10-20,2026020144,LAK @ WSH,LAK,away,Bovada,137,0.4712,0.4115,0.4413,0.0459,0.8,,0.4115,-0.0248,,
-2026-10-20 14:26,2026-10-20,2026020147,BOS @ DAL,BOS,away,BetRivers,145,0.4667,0.4027,0.4347,0.0651,1.1,,0.4027,-0.0133,,
+2026-10-20 14:26,2026-10-20,2026020144,LAK @ WSH,LAK,away,Bovada,137,0.4712,0.4115,0.4413,0.0459,0.8,,0.4164,-0.0132,,
+2026-10-20 14:26,2026-10-20,2026020147,BOS @ DAL,BOS,away,BetRivers,145,0.4667,0.4027,0.4347,0.0651,1.1,,0.3973,-0.0266,,
 2026-10-20 14:26,2026-10-20,2026020148,MIN @ EDM,MIN,away,BetRivers,120,0.5134,0.4514,0.4824,0.0613,1.3,,0.4514,-0.0069,,
 2026-10-20 14:56,2026-10-20,2026020145,TOR @ CBJ,CBJ,home,BetOnline.ag,-145,0.6406,0.5787,0.6097,0.0301,1.1,Anthony Stolarz (Confirmed) @ Jet Greaves (Confirmed),0.5787,-0.0222,,
