@@ -97,6 +97,7 @@ def main(mode: str):
             g[f"{side}_goalie"] = st.get("name")
             g[f"{side}_goalie_status"] = st.get("status")
             g[f"{side}_goalie_gsax"] = round(float(r[f"{side}_goalie"]), 3)
+            g[f"{side}_goalie_swap"] = round(float(r[f"{side}_goalie_swap"]), 3)
         pred = {"date": r["date"], "game_id": int(r["game_id"]), "run": mode,
                 "home": r["home"], "away": r["away"], "model_home": g["model_home"],
                 "market_home": None}
@@ -151,7 +152,7 @@ def main(mode: str):
         "has_odds": bool(odds),
         "diagnostics": diag.MESSAGES, "odds_credits_left": credits,
         "xg_used": any(f.startswith("xg") for f in features),
-        "goalies_used": "goalie_diff" in features,
+        "goalies_used": "goalie_swap_diff" in features,
         "settings": {"model_weight": config.MODEL_WEIGHT, "min_ev": config.MIN_EV,
                      "kelly_fraction": config.KELLY_FRACTION,
                      "max_stake": config.MAX_STAKE_UNITS},

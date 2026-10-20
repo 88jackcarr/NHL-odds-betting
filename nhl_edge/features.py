@@ -16,7 +16,7 @@ from .nhl_api import FINAL_STATES
 BASE_FEATURES = ["elo_diff", "gd_season_diff", "gd_l10_diff", "win_l10_diff",
                  "streak_diff", "rest_diff", "home_b2b", "away_b2b"]
 XG_FEATURES = ["xg_season_diff", "xg_l10_diff", "xg5_l10_diff"]
-GOALIE_FEATURES = ["goalie_diff"]
+GOALIE_FEATURES = ["goalie_swap_diff"]   # tonight's starter vs. the team's usual starter
 
 LEAGUE_SV = 0.903        # used for goals saved above average when xG is missing
 GOALIE_PRIOR = 12.0      # a goalie's rating is pulled toward average until ~this many games
@@ -109,6 +109,8 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
             if bool(r.starter) and not pd.isna(r.goalie_id):
                 starter_of[key] = int(r.goalie_id)
     goalies = defaultdict(GoalieState)
+    team_goalie = {}   # decayed average rating of each team's recent starters
+    league = {"mean": 0.0}   # running league-average saves above xG, so 0 = average goalie
 
     xg_lookup = {}
     if xg is not None and len(xg):
@@ -134,6 +136,8 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
             if gid is None and key in starters_today:
                 gid = starters_today[key].get("goalie_id")
             gk[team] = goalies[gid].rating() if gid is not None else 0.0
+        # How much better/worse tonight's starter is than the team's usual starter.
+        swap = {t: gk[t] - team_goalie.get(t, gk[t]) for t in (g.home, g.away)}
         row = {
             "game_id": g.game_id, "season": g.season, "date": g.date, "start_utc": g.start_utc,
             "state": g.state, "home": g.home, "away": g.away,
@@ -147,6 +151,8 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
             "rest_diff": hs["rest"] - as_["rest"],
             "home_goalie": gk[g.home], "away_goalie": gk[g.away],
             "goalie_diff": gk[g.home] - gk[g.away],
+            "home_goalie_swap": swap[g.home], "away_goalie_swap": swap[g.away],
+            "goalie_swap_diff": swap[g.home] - swap[g.away],
             "home_b2b": hs["b2b"], "away_b2b": as_["b2b"],
             "xg_season_diff": hs["xg_season"] - as_["xg_season"],
             "xg_l10_diff": hs["xg_l10"] - as_["xg_l10"],
@@ -155,6 +161,9 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
         }
 
         if g.state in FINAL_STATES and not pd.isna(g.home_score):
+            for t in (g.home, g.away):
+                if (int(g.game_id), t) in starter_of:
+                    team_goalie[t] = 0.85 * team_goalie.get(t, gk[t]) + 0.15 * gk[t]
             hg, ag = int(g.home_score), int(g.away_score)
             row["home_win"] = int(hg > ag)
             ot = g.last_period in ("OT", "SO")
@@ -172,7 +181,11 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
                         expected = txg[1] * share
                     else:
                         expected = l.shots * (1 - LEAGUE_SV)
-                    goalies[int(l.goalie_id)].update(expected - l.ga, l.toi_sec / 3600)
+                    raw = expected - l.ga
+                    full = l.toi_sec / 3600
+                    goalies[int(l.goalie_id)].update(raw - league["mean"] * full, full)
+                    if full > 0.5:
+                        league["mean"] = 0.995 * league["mean"] + 0.005 * raw / full
             h.update(gdate, hg, ag, xg_lookup.get((int(g.game_id), g.home)))
             a.update(gdate, ag, hg, xg_lookup.get((int(g.game_id), g.away)))
         rows.append(row)

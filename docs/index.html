@@ -111,7 +111,7 @@ const streak = s => s > 0 ? `W${s}` : s < 0 ? `L${-s}` : "";
 const FEATURE_NAMES = {
   elo_diff: "Elo rating", gd_season_diff: "Goal diff (season)", gd_l10_diff: "Goal diff (last 10)",
   win_l10_diff: "Win % (last 10)", streak_diff: "Win streak", rest_diff: "Rest days",
-  goalie_diff: "Starting goalie (GSAx)", home_b2b: "Home back-to-back", away_b2b: "Away back-to-back", xg_season_diff: "xG share (season)",
+  goalie_diff: "Starting goalie (GSAx)", goalie_swap_diff: "Starter vs. usual goalie", home_b2b: "Home back-to-back", away_b2b: "Away back-to-back", xg_season_diff: "xG share (season)",
   xg_l10_diff: "xG share (last 10)", xg5_l10_diff: "5v5 xG share (last 10)"
 };
 
@@ -166,11 +166,14 @@ function gameCard(x) {
     const gname = isHome ? x.home_goalie : x.away_goalie;
     const gstat = (isHome ? x.home_goalie_status : x.away_goalie_status) || "";
     const gsax = isHome ? x.home_goalie_gsax : x.away_goalie_gsax;
+    const swap = isHome ? x.home_goalie_swap : x.away_goalie_swap;
+    const swapTag = swap != null && swap <= -0.15 ? ` · <span class="bad">weaker than usual starter</span>`
+                  : swap != null && swap >= 0.15 ? ` · <span class="good">stronger than usual starter</span>` : "";
     const gtag = /confirm/i.test(gstat) ? "good" : /likely/i.test(gstat) ? "" : "muted";
     return `<div class="row"><div><span class="team">${team}</span><span class="streak">${streak(isHome ? x.home_streak : x.away_streak)}</span></div>
       <div class="num">${pct(m, 0)}</div><div class="num muted">${pct(mk, 0)}</div>
       <div class="num ${cls(ev)}">${has ? odds(isHome ? x.best_home : x.best_away) : "–"}</div>
-      ${gname ? `<div class="goalie">G: ${gname} · <span class="${gtag}">${gstat}</span>${gsax != null ? ` · <span class="num">${signed(gsax, 2)}</span> <span class="muted">GSAx/gm</span>` : ""}</div>` : ""}</div>`;
+      ${gname ? `<div class="goalie">G: ${gname} · <span class="${gtag}">${gstat}</span>${gsax != null ? ` · <span class="num">${signed(gsax, 2)}</span> <span class="muted">GSAx/gm</span>` : ""}${swapTag}</div>` : ""}</div>`;
   };
   const p = x.pick;
   return `<div class="game ${p ? "has-pick" : ""}">
@@ -192,8 +195,8 @@ function renderBacktest(bt) {
     ${rows.map(([k, v]) => `<tr><td>${k}</td><td class="r num">${v.log_loss}</td><td class="r num">${pct(v.accuracy)}</td></tr>`).join("")}
     </table><p class="muted" style="font-size:13px">Lower log loss is better. ${bt.note}</p>
     ${bt.goalie_effect ? `<p style="font-size:13px"><b>Starting goalies:</b> ${bt.goalie_effect.helps
-      ? "adding goalie quality improved predictions."
-      : "adding goalie quality did <b>not</b> improve predictions in the backtest."}</p>` : ""}
+      ? "tonight's starter vs. the usual starter improved predictions."
+      : "starter changes added little in the backtest; team ratings already capture most of a team's usual goaltending."}</p>` : ""}
     <p style="font-size:13px"><b>Win streaks:</b> ${bt.streak_effect.helps
       ? "adding streaks improved predictions slightly."
       : "adding streaks did <b>not</b> improve predictions once other stats were included."}</p>`;
