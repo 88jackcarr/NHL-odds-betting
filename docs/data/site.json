@@ -1,14 +1,14 @@
 {
- "updated": "Tue Oct 20, 2:21 PM CT",
+ "updated": "Tue Oct 20, 2:26 PM CT",
  "run": "picks",
  "date": "2026-10-20",
- "has_odds": false,
+ "has_odds": true,
  "diagnostics": [
   "xG: loaded MoneyPuck data for 33 teams (latest game id 2026020140).",
   "xG coverage of recent games: 100% (needs 75% to be used).",
-  "Odds: no ODDS_API_KEY secret reached the run. Check the secret's exact name under Settings > Secrets and variables > Actions > Repository secrets."
+  "Odds: loaded 13 NHL games with prices (13 listed by the API)."
  ],
- "odds_credits_left": null,
+ "odds_credits_left": "499",
  "xg_used": true,
  "settings": {
   "model_weight": 0.5,
@@ -26,7 +26,15 @@
    "home_streak": 1,
    "away_streak": -2,
    "model_home": 0.7508,
-   "pick": null
+   "pick": null,
+   "market_home": 0.6675,
+   "blend_home": 0.7092,
+   "best_home": -225,
+   "best_home_book": "DraftKings",
+   "best_away": 200,
+   "best_away_book": "BetOnline.ag",
+   "ev_home": 0.0244,
+   "ev_away": -0.1275
   },
   {
    "game_id": 2026020142,
@@ -37,7 +45,15 @@
    "home_streak": -1,
    "away_streak": -1,
    "model_home": 0.5665,
-   "pick": null
+   "pick": null,
+   "market_home": 0.5171,
+   "blend_home": 0.5418,
+   "best_home": -115,
+   "best_home_book": "BetUS",
+   "best_away": 102,
+   "best_away_book": "BetOnline.ag",
+   "ev_home": 0.0129,
+   "ev_away": -0.0744
   },
   {
    "game_id": 2026020143,
@@ -48,7 +64,15 @@
    "home_streak": 1,
    "away_streak": -3,
    "model_home": 0.617,
-   "pick": null
+   "pick": null,
+   "market_home": 0.5819,
+   "blend_home": 0.5994,
+   "best_home": -150,
+   "best_home_book": "BetOnline.ag",
+   "best_away": 132,
+   "best_away_book": "BetOnline.ag",
+   "ev_home": -0.0009,
+   "ev_away": -0.0707
   },
   {
    "game_id": 2026020144,
@@ -59,7 +83,21 @@
    "home_streak": 2,
    "away_streak": -6,
    "model_home": 0.5288,
-   "pick": null
+   "pick": {
+    "team": "LAK",
+    "side": "away",
+    "odds": 137,
+    "ev": 0.0459,
+    "stake": 0.8
+   },
+   "market_home": 0.5885,
+   "blend_home": 0.5587,
+   "best_home": -154,
+   "best_home_book": "LowVig.ag",
+   "best_away": 137,
+   "best_away_book": "Bovada",
+   "ev_home": -0.0786,
+   "ev_away": 0.0459
   },
   {
    "game_id": 2026020145,
@@ -70,7 +108,15 @@
    "home_streak": -1,
    "away_streak": 1,
    "model_home": 0.6399,
-   "pick": null
+   "pick": null,
+   "market_home": 0.5745,
+   "blend_home": 0.6072,
+   "best_home": -145,
+   "best_home_book": "BetOnline.ag",
+   "best_away": 130,
+   "best_away_book": "DraftKings",
+   "ev_home": 0.0259,
+   "ev_away": -0.0965
   },
   {
    "game_id": 2026020146,
@@ -81,7 +127,15 @@
    "home_streak": -2,
    "away_streak": -2,
    "model_home": 0.58,
-   "pick": null
+   "pick": null,
+   "market_home": 0.5628,
+   "blend_home": 0.5714,
+   "best_home": -130,
+   "best_home_book": "Bovada",
+   "best_away": 124,
+   "best_away_book": "DraftKings",
+   "ev_home": 0.0109,
+   "ev_away": -0.0399
   },
   {
    "game_id": 2026020147,
@@ -92,7 +146,21 @@
    "home_streak": 2,
    "away_streak": 5,
    "model_home": 0.5333,
-   "pick": null
+   "pick": {
+    "team": "BOS",
+    "side": "away",
+    "odds": 145,
+    "ev": 0.0651,
+    "stake": 1.1
+   },
+   "market_home": 0.5973,
+   "blend_home": 0.5653,
+   "best_home": -160,
+   "best_home_book": "LowVig.ag",
+   "best_away": 145,
+   "best_away_book": "BetRivers",
+   "ev_home": -0.0814,
+   "ev_away": 0.0651
   },
   {
    "game_id": 2026020148,
@@ -103,7 +171,21 @@
    "home_streak": 1,
    "away_streak": 2,
    "model_home": 0.4866,
-   "pick": null
+   "pick": {
+    "team": "MIN",
+    "side": "away",
+    "odds": 120,
+    "ev": 0.0613,
+    "stake": 1.3
+   },
+   "market_home": 0.5486,
+   "blend_home": 0.5176,
+   "best_home": -130,
+   "best_home_book": "LowVig.ag",
+   "best_away": 120,
+   "best_away_book": "BetRivers",
+   "ev_home": -0.0842,
+   "ev_away": 0.0613
   },
   {
    "game_id": 2026020149,
@@ -114,7 +196,15 @@
    "home_streak": -2,
    "away_streak": 2,
    "model_home": 0.4531,
-   "pick": null
+   "pick": null,
+   "market_home": 0.488,
+   "blend_home": 0.4706,
+   "best_home": 101,
+   "best_home_book": "LowVig.ag",
+   "best_away": -114,
+   "best_away_book": "FanDuel",
+   "ev_home": -0.0542,
+   "ev_away": -0.0061
   },
   {
    "game_id": 2026020150,
@@ -125,7 +215,15 @@
    "home_streak": -7,
    "away_streak": -1,
    "model_home": 0.2124,
-   "pick": null
+   "pick": null,
+   "market_home": 0.2759,
+   "blend_home": 0.2442,
+   "best_home": 260,
+   "best_home_book": "Bovada",
+   "best_away": -298,
+   "best_away_book": "DraftKings",
+   "ev_home": -0.1211,
+   "ev_away": 0.0095
   },
   {
    "game_id": 2026020151,
@@ -136,21 +234,87 @@
    "home_streak": 3,
    "away_streak": 2,
    "model_home": 0.4997,
-   "pick": null
+   "pick": null,
+   "market_home": 0.5,
+   "blend_home": 0.4999,
+   "best_home": -106,
+   "best_home_book": "LowVig.ag",
+   "best_away": -103,
+   "best_away_book": "BetRivers",
+   "ev_home": -0.0286,
+   "ev_away": -0.0143
   }
  ],
  "record": {
   "bets": 0,
-  "pending": 0,
+  "pending": 3,
   "wins": 0,
   "losses": 0,
   "units_staked": 0.0,
   "units_profit": 0.0,
   "roi": null,
-  "avg_clv": null,
-  "beat_close_pct": null
+  "avg_clv": -0.015,
+  "beat_close_pct": 0.0
  },
- "bets": [],
+ "bets": [
+  {
+   "logged_at": "2026-10-20 14:26",
+   "date": "2026-10-20",
+   "game_id": 2026020148,
+   "matchup": "MIN @ EDM",
+   "pick": "MIN",
+   "side": "away",
+   "book": "BetRivers",
+   "odds": 120,
+   "model_prob": 0.5134,
+   "market_prob": 0.4514,
+   "prob": 0.4824,
+   "ev": 0.0613,
+   "stake": 1.3,
+   "close_fair": 0.4514,
+   "clv": -0.0069,
+   "result": null,
+   "profit": null
+  },
+  {
+   "logged_at": "2026-10-20 14:26",
+   "date": "2026-10-20",
+   "game_id": 2026020147,
+   "matchup": "BOS @ DAL",
+   "pick": "BOS",
+   "side": "away",
+   "book": "BetRivers",
+   "odds": 145,
+   "model_prob": 0.4667,
+   "market_prob": 0.4027,
+   "prob": 0.4347,
+   "ev": 0.0651,
+   "stake": 1.1,
+   "close_fair": 0.4027,
+   "clv": -0.0133,
+   "result": null,
+   "profit": null
+  },
+  {
+   "logged_at": "2026-10-20 14:26",
+   "date": "2026-10-20",
+   "game_id": 2026020144,
+   "matchup": "LAK @ WSH",
+   "pick": "LAK",
+   "side": "away",
+   "book": "Bovada",
+   "odds": 137,
+   "model_prob": 0.4712,
+   "market_prob": 0.4115,
+   "prob": 0.4413,
+   "ev": 0.0459,
+   "stake": 0.8,
+   "close_fair": 0.4115,
+   "clv": -0.0248,
+   "result": null,
+   "profit": null
+  }
+ ],
  "backtest": {
   "features": [
    "elo_diff",
