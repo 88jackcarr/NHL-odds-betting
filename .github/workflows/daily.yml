@@ -47,7 +47,7 @@ jobs:
 
       - name: Run model
         env:
-          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY || secrets.API_KEY }}
         run: python run_daily.py ${{ steps.mode.outputs.mode }}
 
       - name: Save results
