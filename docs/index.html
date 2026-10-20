@@ -45,6 +45,7 @@
   .row > :not(:first-child) { text-align: right; }
   .team { font: 700 22px "Barlow Condensed", sans-serif; letter-spacing: .5px; }
   .streak { font-size: 11px; color: var(--muted); margin-left: 6px; font-family: "JetBrains Mono", monospace; }
+  .goalie { grid-column: 1 / -1; text-align: left !important; font-size: 12px; color: var(--muted); margin-top: -4px; }
   .pick { margin-top: 12px; background: rgba(124,196,255,.1); border-radius: 8px; padding: 10px 12px;
           display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 14px; }
   .pick b { color: var(--ice); }
@@ -110,7 +111,7 @@ const streak = s => s > 0 ? `W${s}` : s < 0 ? `L${-s}` : "";
 const FEATURE_NAMES = {
   elo_diff: "Elo rating", gd_season_diff: "Goal diff (season)", gd_l10_diff: "Goal diff (last 10)",
   win_l10_diff: "Win % (last 10)", streak_diff: "Win streak", rest_diff: "Rest days",
-  home_b2b: "Home back-to-back", away_b2b: "Away back-to-back", xg_season_diff: "xG share (season)",
+  goalie_diff: "Starting goalie (GSAx)", home_b2b: "Home back-to-back", away_b2b: "Away back-to-back", xg_season_diff: "xG share (season)",
   xg_l10_diff: "xG share (last 10)", xg5_l10_diff: "5v5 xG share (last 10)"
 };
 
@@ -123,6 +124,7 @@ function render(d) {
     `Updated ${d.updated}<br>${d.has_odds ? `Odds credits left: ${d.odds_credits_left ?? "?"}` : "No odds this run"}`;
   const n = [];
   if (!d.has_odds) n.push("No sportsbook odds were loaded, so only model probabilities are shown. Check the ODDS_API_KEY secret.");
+  if (d.goalies_used === false) n.push("Starting-goalie data wasn't available this run, so goalie quality wasn't used.");
   if (!d.xg_used) n.push("Expected-goals data wasn't available this run; the model used goals, Elo, form, streaks and rest only.");
   document.getElementById("notices").innerHTML = n.map(t => `<div class="notice">${t}</div>`).join("") +
     ((d.diagnostics || []).length ? `<details class="notice"><summary>Data status (last run)</summary><ul style="margin:6px 0 0;padding-left:18px">${d.diagnostics.map(m => `<li>${m.replace(/</g, "&lt;")}</li>`).join("")}</ul></details>` : "");
@@ -161,9 +163,14 @@ function gameCard(x) {
     const m = isHome ? x.model_home : 1 - x.model_home;
     const mk = has ? (isHome ? x.market_home : 1 - x.market_home) : null;
     const ev = has ? (isHome ? x.ev_home : x.ev_away) : null;
+    const gname = isHome ? x.home_goalie : x.away_goalie;
+    const gstat = (isHome ? x.home_goalie_status : x.away_goalie_status) || "";
+    const gsax = isHome ? x.home_goalie_gsax : x.away_goalie_gsax;
+    const gtag = /confirm/i.test(gstat) ? "good" : /likely/i.test(gstat) ? "" : "muted";
     return `<div class="row"><div><span class="team">${team}</span><span class="streak">${streak(isHome ? x.home_streak : x.away_streak)}</span></div>
       <div class="num">${pct(m, 0)}</div><div class="num muted">${pct(mk, 0)}</div>
-      <div class="num ${cls(ev)}">${has ? odds(isHome ? x.best_home : x.best_away) : "–"}</div></div>`;
+      <div class="num ${cls(ev)}">${has ? odds(isHome ? x.best_home : x.best_away) : "–"}</div>
+      ${gname ? `<div class="goalie">G: ${gname} · <span class="${gtag}">${gstat}</span>${gsax != null ? ` · <span class="num">${signed(gsax, 2)}</span> <span class="muted">GSAx/gm</span>` : ""}</div>` : ""}</div>`;
   };
   const p = x.pick;
   return `<div class="game ${p ? "has-pick" : ""}">
@@ -184,6 +191,9 @@ function renderBacktest(bt) {
     <table><tr><th></th><th class="r">Log loss</th><th class="r">Accuracy</th></tr>
     ${rows.map(([k, v]) => `<tr><td>${k}</td><td class="r num">${v.log_loss}</td><td class="r num">${pct(v.accuracy)}</td></tr>`).join("")}
     </table><p class="muted" style="font-size:13px">Lower log loss is better. ${bt.note}</p>
+    ${bt.goalie_effect ? `<p style="font-size:13px"><b>Starting goalies:</b> ${bt.goalie_effect.helps
+      ? "adding goalie quality improved predictions."
+      : "adding goalie quality did <b>not</b> improve predictions in the backtest."}</p>` : ""}
     <p style="font-size:13px"><b>Win streaks:</b> ${bt.streak_effect.helps
       ? "adding streaks improved predictions slightly."
       : "adding streaks did <b>not</b> improve predictions once other stats were included."}</p>`;

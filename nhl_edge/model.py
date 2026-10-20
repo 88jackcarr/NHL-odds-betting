@@ -7,7 +7,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 from . import config
-from .features import BASE_FEATURES, XG_FEATURES
+from .features import BASE_FEATURES, GOALIE_FEATURES, XG_FEATURES
 
 STREAK = ["streak_diff"]
 
@@ -21,8 +21,10 @@ def training_rows(feats: pd.DataFrame) -> pd.DataFrame:
     return done.iloc[config.BURN_IN_GAMES:]
 
 
-def choose_features(feats: pd.DataFrame, xg_coverage: float) -> list[str]:
-    return BASE_FEATURES + (XG_FEATURES if xg_coverage >= 0.75 else [])
+def choose_features(feats: pd.DataFrame, xg_coverage: float,
+                    goalie_coverage: float = 0.0) -> list[str]:
+    return (BASE_FEATURES + (XG_FEATURES if xg_coverage >= 0.75 else [])
+            + (GOALIE_FEATURES if goalie_coverage >= 0.75 else []))
 
 
 def fit(train: pd.DataFrame, features: list[str]):
@@ -39,6 +41,21 @@ def _score(y, p):
     return {"log_loss": round(float(log_loss(y, p, labels=[0, 1])), 4),
             "brier": round(float(brier_score_loss(y, p)), 4),
             "accuracy": round(float(np.mean((p > 0.5) == y)), 4)}
+
+
+def _ablation(data, seasons, features, drop, y, overall):
+    if not any(f in features for f in drop):
+        return None
+    keep = [f for f in features if f not in drop]
+    ps = []
+    for s in seasons[1:]:
+        train, test = data[data["season"] < s], data[data["season"] == s]
+        if len(test) < 50:
+            continue
+        ps.append(predict(fit(train, keep), test, keep))
+    ll = log_loss(y, np.concatenate(ps), labels=[0, 1])
+    return {"log_loss_without": round(float(ll), 4), "log_loss_with": overall["log_loss"],
+            "helps": bool(overall["log_loss"] < ll - 0.0005)}
 
 
 def backtest(feats: pd.DataFrame, features: list[str]) -> dict:
@@ -90,6 +107,7 @@ def backtest(feats: pd.DataFrame, features: list[str]) -> dict:
             "always_home_rate": _score(y, np.concatenate(all_base)),
             "elo_only": _score(y, np.concatenate(all_elo)),
         },
+        "goalie_effect": _ablation(data, seasons, features, GOALIE_FEATURES, y, overall),
         "streak_effect": {
             "log_loss_without_streaks": round(float(ll_ns), 4),
             "log_loss_with_streaks": overall["log_loss"],

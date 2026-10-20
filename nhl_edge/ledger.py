@@ -6,7 +6,7 @@ from .nhl_api import FINAL_STATES
 from .odds import american_to_decimal
 
 BET_COLS = ["logged_at", "date", "game_id", "matchup", "pick", "side", "book", "odds",
-            "model_prob", "market_prob", "prob", "ev", "stake", "close_fair", "clv",
+            "model_prob", "market_prob", "prob", "ev", "stake", "goalies", "close_fair", "clv",
             "result", "profit"]
 
 
@@ -17,7 +17,7 @@ def load_bets() -> pd.DataFrame:
 
 
 def save_bets(bets: pd.DataFrame):
-    bets[BET_COLS].to_csv(config.BETS_CSV, index=False)
+    bets.reindex(columns=BET_COLS).to_csv(config.BETS_CSV, index=False)
 
 
 def add_bets(bets: pd.DataFrame, new: list[dict]) -> pd.DataFrame:

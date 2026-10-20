@@ -16,6 +16,25 @@ from .nhl_api import FINAL_STATES
 BASE_FEATURES = ["elo_diff", "gd_season_diff", "gd_l10_diff", "win_l10_diff",
                  "streak_diff", "rest_diff", "home_b2b", "away_b2b"]
 XG_FEATURES = ["xg_season_diff", "xg_l10_diff", "xg5_l10_diff"]
+GOALIE_FEATURES = ["goalie_diff"]
+
+LEAGUE_SV = 0.903        # used for goals saved above average when xG is missing
+GOALIE_PRIOR = 12.0      # a goalie's rating is pulled toward average until ~this many games
+GOALIE_DECAY = 0.985     # older games count less (half weight after ~45 games)
+
+
+class GoalieState:
+    def __init__(self):
+        self.saved = 0.0    # decayed goals saved above expected
+        self.games = 0.0    # decayed full-game equivalents
+
+    def rating(self):
+        """Goals saved above expected per game, shrunk toward 0."""
+        return self.saved / (self.games + GOALIE_PRIOR)
+
+    def update(self, gsax, share):
+        self.saved = self.saved * GOALIE_DECAY + gsax
+        self.games = self.games * GOALIE_DECAY + share
 
 
 class TeamState:
@@ -78,7 +97,19 @@ def _elo_update(h, a, home_win, gd, overtime):
     a.elo -= delta
 
 
-def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None) -> pd.DataFrame:
+def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
+                   goalie_games: pd.DataFrame | None = None,
+                   starters_today: dict | None = None) -> pd.DataFrame:
+    starters_today = starters_today or {}
+    starter_of, lines_of = {}, defaultdict(list)
+    if goalie_games is not None and len(goalie_games):
+        for r in goalie_games.itertuples(index=False):
+            key = (int(r.game_id), r.team)
+            lines_of[key].append(r)
+            if bool(r.starter) and not pd.isna(r.goalie_id):
+                starter_of[key] = int(r.goalie_id)
+    goalies = defaultdict(GoalieState)
+
     xg_lookup = {}
     if xg is not None and len(xg):
         for r in xg.itertuples(index=False):
@@ -96,6 +127,13 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None) -> pd.Da
                 t.reset_season()
 
         hs, as_ = h.snapshot(gdate), a.snapshot(gdate)
+        gk = {}
+        for team in (g.home, g.away):
+            key = (int(g.game_id), team)
+            gid = starter_of.get(key)
+            if gid is None and key in starters_today:
+                gid = starters_today[key].get("goalie_id")
+            gk[team] = goalies[gid].rating() if gid is not None else 0.0
         row = {
             "game_id": g.game_id, "season": g.season, "date": g.date, "start_utc": g.start_utc,
             "state": g.state, "home": g.home, "away": g.away,
@@ -107,6 +145,8 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None) -> pd.Da
             "win_l10_diff": hs["win_l10"] - as_["win_l10"],
             "streak_diff": float(np.clip(hs["streak"], -6, 6) - np.clip(as_["streak"], -6, 6)),
             "rest_diff": hs["rest"] - as_["rest"],
+            "home_goalie": gk[g.home], "away_goalie": gk[g.away],
+            "goalie_diff": gk[g.home] - gk[g.away],
             "home_b2b": hs["b2b"], "away_b2b": as_["b2b"],
             "xg_season_diff": hs["xg_season"] - as_["xg_season"],
             "xg_l10_diff": hs["xg_l10"] - as_["xg_l10"],
@@ -119,6 +159,20 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None) -> pd.Da
             row["home_win"] = int(hg > ag)
             ot = g.last_period in ("OT", "SO")
             _elo_update(h, a, int(hg > ag), hg - ag, ot)
+            for team in (g.home, g.away):
+                key = (int(g.game_id), team)
+                lines = lines_of.get(key, [])
+                total = sum(l.toi_sec for l in lines) or 1
+                txg = xg_lookup.get(key)
+                for l in lines:
+                    if pd.isna(l.goalie_id) or l.toi_sec <= 0:
+                        continue
+                    share = l.toi_sec / total
+                    if txg is not None and not pd.isna(txg[1]):
+                        expected = txg[1] * share
+                    else:
+                        expected = l.shots * (1 - LEAGUE_SV)
+                    goalies[int(l.goalie_id)].update(expected - l.ga, l.toi_sec / 3600)
             h.update(gdate, hg, ag, xg_lookup.get((int(g.game_id), g.home)))
             a.update(gdate, ag, hg, xg_lookup.get((int(g.game_id), g.away)))
         rows.append(row)

@@ -14,6 +14,7 @@ import pandas as pd
 
 from nhl_edge import config, diag, ledger, model
 from nhl_edge.features import build_features
+from nhl_edge.goalies import todays_starters, update_goalie_games
 from nhl_edge.nhl_api import update_games
 from nhl_edge.odds import american_to_decimal, fetch_odds
 from nhl_edge.xg import load_xg
@@ -61,8 +62,17 @@ def main(mode: str):
         diag.note(f"xG: lowest team coverage: {worst}")
     diag.note(f"xG coverage of recent games: {xg_cov:.0%} (needs 75% to be used).")
 
-    feats = build_features(games, xg)
-    features = model.choose_features(feats, xg_cov)
+    print("Loading goalie starts...")
+    goalie_games = update_goalie_games(games)
+    starter_keys = set(zip(goalie_games.loc[goalie_games["starter"], "game_id"].astype(int),
+                           goalie_games.loc[goalie_games["starter"], "team"]))
+    g_cov = sum(k in starter_keys for k in side_rows) / max(len(side_rows), 1)
+    diag.note(f"Goalies: starter known for {g_cov:.0%} of recent games (needs 75% to be used).")
+    today_games = games[games["date"] == today.isoformat()]
+    starters = todays_starters(today_games, goalie_games, games, today) if len(today_games) else {}
+
+    feats = build_features(games, xg, goalie_games, starters)
+    features = model.choose_features(feats, xg_cov, g_cov)
     train = model.training_rows(feats)
     print(f"Training on {len(train)} games with {len(features)} features...")
     clf = model.fit(train, features)
@@ -82,6 +92,11 @@ def main(mode: str):
              "home": r["home"], "away": r["away"], "state": r["state"],
              "home_streak": int(r["home_streak"]), "away_streak": int(r["away_streak"]),
              "model_home": round(float(r["model_home"]), 4), "pick": None}
+        for side in ("home", "away"):
+            st = starters.get((int(r["game_id"]), r[side]), {})
+            g[f"{side}_goalie"] = st.get("name")
+            g[f"{side}_goalie_status"] = st.get("status")
+            g[f"{side}_goalie_gsax"] = round(float(r[f"{side}_goalie"]), 3)
         pred = {"date": r["date"], "game_id": int(r["game_id"]), "run": mode,
                 "home": r["home"], "away": r["away"], "model_home": g["model_home"],
                 "market_home": None}
@@ -112,7 +127,9 @@ def main(mode: str):
                     "model_prob": round(r["model_home"] if side == "home" else 1 - r["model_home"], 4),
                     "market_prob": round(o["market_home"] if side == "home" else 1 - o["market_home"], 4),
                     "prob": round(p_home if side == "home" else 1 - p_home, 4),
-                    "ev": round(ev, 4), "stake": stake})
+                    "ev": round(ev, 4), "stake": stake,
+                    "goalies": f"{g['away_goalie'] or '?'} ({g['away_goalie_status'] or '-'}) @ "
+                               f"{g['home_goalie'] or '?'} ({g['home_goalie_status'] or '-'})"})
         games_out.append(g)
         pred_rows.append(pred)
 
@@ -134,6 +151,7 @@ def main(mode: str):
         "has_odds": bool(odds),
         "diagnostics": diag.MESSAGES, "odds_credits_left": credits,
         "xg_used": any(f.startswith("xg") for f in features),
+        "goalies_used": "goalie_diff" in features,
         "settings": {"model_weight": config.MODEL_WEIGHT, "min_ev": config.MIN_EV,
                      "kelly_fraction": config.KELLY_FRACTION,
                      "max_stake": config.MAX_STAKE_UNITS},
