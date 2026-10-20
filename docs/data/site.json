@@ -1,8 +1,13 @@
 {
- "updated": "Tue Oct 20, 11:20 AM CT",
+ "updated": "Tue Oct 20, 1:44 PM CT",
  "run": "picks",
  "date": "2026-10-20",
  "has_odds": false,
+ "diagnostics": [
+  "xG: loaded MoneyPuck data for 33 teams (latest game id 2026020140).",
+  "xG coverage of recent games: 83% (needs 90% to be used).",
+  "Odds: no ODDS_API_KEY secret reached the run. Check the secret's exact name under Settings > Secrets and variables > Actions > Repository secrets."
+ ],
  "odds_credits_left": null,
  "xg_used": false,
  "settings": {
