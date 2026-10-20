@@ -17,12 +17,19 @@ def load_xg(teams) -> pd.DataFrame:
     """Returns columns: game_id, team, xgf, xga, xgf5, xga5 (empty frame if unavailable)."""
     frames, errors = [], []
     for team in sorted(set(teams)):
-        mp = MONEYPUCK_ABBREV.get(team, team)
         try:
-            r = requests.get(config.MONEYPUCK_TEAM_URL.format(team=mp), timeout=60,
-                             headers={"User-Agent": "Mozilla/5.0 (nhl-edge research script)"})
-            r.raise_for_status()
-            df = pd.read_csv(io.StringIO(r.text))
+            df = None
+            # Try both spellings (e.g. LAK and L.A) and keep whichever file is most recent.
+            for mp in dict.fromkeys([team, MONEYPUCK_ABBREV.get(team, team)]):
+                r = requests.get(config.MONEYPUCK_TEAM_URL.format(team=mp), timeout=60,
+                                 headers={"User-Agent": "Mozilla/5.0 (nhl-edge research script)"})
+                if r.status_code != 200:
+                    continue
+                cand = pd.read_csv(io.StringIO(r.text))
+                if df is None or cand["gameId"].max() > df["gameId"].max():
+                    df = cand
+            if df is None:
+                raise RuntimeError("no MoneyPuck file found")
             df = df[df["situation"].isin(["all", "5on5"])]
             wide = df.pivot_table(index="gameId", columns="situation",
                                   values=["xGoalsFor", "xGoalsAgainst"], aggfunc="first")
