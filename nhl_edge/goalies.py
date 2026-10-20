@@ -5,6 +5,7 @@ page is unavailable or a game isn't listed, the starter is projected from recent
 the team's most-used goalie, or the backup on the second night of a back-to-back.
 """
 import json
+import time
 import re
 import unicodedata
 from concurrent.futures import ThreadPoolExecutor
@@ -31,13 +32,25 @@ def _toi(s):
         return 0
 
 
+_session = requests.Session()
+_session.headers.update(UA)
+
+
 def _box(gid):
-    try:
-        r = requests.get(BOX_URL.format(gid=gid), timeout=30)
-        if r.status_code != 200:
-            return None
-        data = r.json()
-    except Exception:
+    data = None
+    for attempt in range(5):
+        try:
+            r = _session.get(BOX_URL.format(gid=gid), timeout=30)
+            if r.status_code == 200:
+                data = r.json()
+                break
+            if r.status_code == 404:
+                return None
+            wait = float(r.headers.get("Retry-After", 0) or 0)
+            time.sleep(max(wait, 2 * (attempt + 1)))   # throttled: back off
+        except Exception:
+            time.sleep(2 * (attempt + 1))
+    if data is None:
         return None
     rows = []
     stats = data.get("playerByGameStats", {})
@@ -73,15 +86,19 @@ def update_goalie_games(games: pd.DataFrame) -> pd.DataFrame:
     todo = [g for g in done if g not in have]
     if todo:
         print(f"  Fetching {len(todo)} box scores for goalie starts...")
-        with ThreadPoolExecutor(max_workers=8) as ex:
-            results = list(ex.map(_box, todo))
-        new = [r for rows in results if rows for r in rows]
-        failed = sum(1 for r in results if not r)
+        failed = 0
+        for i in range(0, len(todo), 300):
+            chunk = todo[i:i + 300]
+            with ThreadPoolExecutor(max_workers=3) as ex:
+                results = list(ex.map(_box, chunk))
+            new = [r for rows in results if rows for r in rows]
+            failed += sum(1 for r in results if not r)
+            if new:
+                cached = pd.concat([cached, pd.DataFrame(new, columns=COLS)], ignore_index=True)
+                cached.to_csv(path, index=False)
+            print(f"    {min(i + 300, len(todo))}/{len(todo)} done, {failed} failed")
         if failed:
             note(f"Goalies: {failed} box scores couldn't be loaded (will retry next run).")
-        if new:
-            cached = pd.concat([cached, pd.DataFrame(new, columns=COLS)], ignore_index=True)
-            cached.to_csv(path, index=False)
     cached["starter"] = cached["starter"].astype(str).str.lower().eq("true")
     return cached
 
