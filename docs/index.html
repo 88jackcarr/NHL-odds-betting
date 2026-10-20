@@ -124,7 +124,8 @@ function render(d) {
   const n = [];
   if (!d.has_odds) n.push("No sportsbook odds were loaded, so only model probabilities are shown. Check the ODDS_API_KEY secret.");
   if (!d.xg_used) n.push("Expected-goals data wasn't available this run; the model used goals, Elo, form, streaks and rest only.");
-  document.getElementById("notices").innerHTML = n.map(t => `<div class="notice">${t}</div>`).join("");
+  document.getElementById("notices").innerHTML = n.map(t => `<div class="notice">${t}</div>`).join("") +
+    ((d.diagnostics || []).length ? `<details class="notice"><summary>Data status (last run)</summary><ul style="margin:6px 0 0;padding-left:18px">${d.diagnostics.map(m => `<li>${m.replace(/</g, "&lt;")}</li>`).join("")}</ul></details>` : "");
 
   const r = d.record;
   const tiles = [

@@ -5,6 +5,7 @@ from statistics import median
 import requests
 
 from . import config
+from .diag import note
 from .teams import abbrev_for
 
 
@@ -18,22 +19,31 @@ def implied(a: float) -> float:
 
 def fetch_odds():
     """Returns (list of games with odds, credits remaining) or ([], None) without a key."""
-    key = os.environ.get("ODDS_API_KEY")
+    key = (os.environ.get("ODDS_API_KEY") or "").strip()
     if not key:
-        print("  No ODDS_API_KEY set; running model-only.")
+        note("Odds: no ODDS_API_KEY secret reached the run. Check the secret's exact name "
+             "under Settings > Secrets and variables > Actions > Repository secrets.")
         return [], None
-    r = requests.get(config.ODDS_URL, timeout=30, params={
-        "apiKey": key, "regions": "us", "markets": "h2h", "oddsFormat": "american"})
+    try:
+        r = requests.get(config.ODDS_URL, timeout=30, params={
+            "apiKey": key, "regions": "us", "markets": "h2h", "oddsFormat": "american"})
+    except requests.RequestException as e:
+        note(f"Odds: couldn't reach The Odds API ({type(e).__name__}).")
+        return [], None
     if r.status_code != 200:
-        print(f"  Odds API error {r.status_code}: {r.text[:200]}")
+        note(f"Odds: The Odds API returned error {r.status_code}: {r.text[:200].replace(key, '***')} "
+             f"(key length {len(key)}).")
         return [], None
-    return [g for g in (_parse(e) for e in r.json()) if g], r.headers.get("x-requests-remaining")
+    events = r.json()
+    games = [g for g in (_parse(e) for e in events) if g]
+    note(f"Odds: loaded {len(games)} NHL games with prices ({len(events)} listed by the API).")
+    return games, r.headers.get("x-requests-remaining")
 
 
 def _parse(event):
     home, away = abbrev_for(event["home_team"]), abbrev_for(event["away_team"])
     if not home or not away:
-        print(f"  Unknown team name in odds: {event['home_team']} / {event['away_team']}")
+        note(f"Odds: unknown team name {event['home_team']} / {event['away_team']}")
         return None
     books = []
     for b in event.get("bookmakers", []):

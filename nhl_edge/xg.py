@@ -9,16 +9,18 @@ import pandas as pd
 import requests
 
 from . import config
+from .diag import note
 from .teams import MONEYPUCK_ABBREV
 
 
 def load_xg(teams) -> pd.DataFrame:
     """Returns columns: game_id, team, xgf, xga, xgf5, xga5 (empty frame if unavailable)."""
-    frames = []
+    frames, errors = [], []
     for team in sorted(set(teams)):
         mp = MONEYPUCK_ABBREV.get(team, team)
         try:
-            r = requests.get(config.MONEYPUCK_TEAM_URL.format(team=mp), timeout=60)
+            r = requests.get(config.MONEYPUCK_TEAM_URL.format(team=mp), timeout=60,
+                             headers={"User-Agent": "Mozilla/5.0 (nhl-edge research script)"})
             r.raise_for_status()
             df = pd.read_csv(io.StringIO(r.text))
             df = df[df["situation"].isin(["all", "5on5"])]
@@ -34,7 +36,12 @@ def load_xg(teams) -> pd.DataFrame:
             })
             frames.append(out)
         except Exception as e:  # missing team file, format change, network error
-            print(f"  xG unavailable for {team}: {type(e).__name__}")
+            errors.append(f"{team}: {type(e).__name__} {str(e)[:80]}")
+    if errors:
+        note(f"xG: MoneyPuck failed for {len(errors)} teams, e.g. {errors[0]}")
+    if frames:
+        latest = pd.concat(frames)["game_id"].max()
+        note(f"xG: loaded MoneyPuck data for {len(frames)} teams (latest game id {latest}).")
     if not frames:
         return pd.DataFrame(columns=["game_id", "team", "xgf", "xga", "xgf5", "xga5"])
     return pd.concat(frames, ignore_index=True)

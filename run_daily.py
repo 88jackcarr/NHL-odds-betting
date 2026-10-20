@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 
 import pandas as pd
 
-from nhl_edge import config, ledger, model
+from nhl_edge import config, diag, ledger, model
 from nhl_edge.features import build_features
 from nhl_edge.nhl_api import update_games
 from nhl_edge.odds import american_to_decimal, fetch_odds
@@ -53,7 +53,7 @@ def main(mode: str):
     covered = set(zip(xg["game_id"].astype(int), xg["team"])) if len(xg) else set()
     xg_cov = (sum((int(g), h) in covered for g, h in zip(recent["game_id"], recent["home"]))
               / max(len(recent), 1))
-    print(f"  xG coverage of recent games: {xg_cov:.0%}")
+    diag.note(f"xG coverage of recent games: {xg_cov:.0%} (needs 90% to be used).")
 
     feats = build_features(games, xg)
     features = model.choose_features(feats, xg_cov)
@@ -125,7 +125,8 @@ def main(mode: str):
     site = {
         "updated": now.astimezone(CT).strftime("%a %b %-d, %-I:%M %p CT"),
         "run": mode, "date": today.isoformat(),
-        "has_odds": bool(odds), "odds_credits_left": credits,
+        "has_odds": bool(odds),
+        "diagnostics": diag.MESSAGES, "odds_credits_left": credits,
         "xg_used": any(f.startswith("xg") for f in features),
         "settings": {"model_weight": config.MODEL_WEIGHT, "min_ev": config.MIN_EV,
                      "kelly_fraction": config.KELLY_FRACTION,
