@@ -10,10 +10,22 @@ BET_COLS = ["logged_at", "date", "game_id", "matchup", "pick", "side", "book", "
             "result", "profit"]
 
 
+TEXT_COLS = ["logged_at", "date", "matchup", "pick", "side", "book", "goalies", "result"]
+
+
+def _types(bets: pd.DataFrame) -> pd.DataFrame:
+    bets = bets.reindex(columns=BET_COLS)
+    for c in TEXT_COLS:   # text columns that may be all-blank must not be read as numbers
+        bets[c] = bets[c].astype(object)
+    for c in ("close_fair", "clv", "profit"):
+        bets[c] = pd.to_numeric(bets[c], errors="coerce")
+    return bets
+
+
 def load_bets() -> pd.DataFrame:
     if config.BETS_CSV.exists():
-        return pd.read_csv(config.BETS_CSV)
-    return pd.DataFrame(columns=BET_COLS)
+        return _types(pd.read_csv(config.BETS_CSV))
+    return _types(pd.DataFrame(columns=BET_COLS))
 
 
 def save_bets(bets: pd.DataFrame):
@@ -25,7 +37,7 @@ def add_bets(bets: pd.DataFrame, new: list[dict]) -> pd.DataFrame:
     have = set(zip(bets["game_id"].astype(int), bets["side"])) if len(bets) else set()
     fresh = [b for b in new if (int(b["game_id"]), b["side"]) not in have]
     if fresh:
-        bets = pd.concat([bets, pd.DataFrame(fresh)], ignore_index=True)
+        bets = _types(pd.concat([bets, _types(pd.DataFrame(fresh))], ignore_index=True))
     return bets
 
 

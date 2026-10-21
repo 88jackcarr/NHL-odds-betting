@@ -140,8 +140,12 @@ def main(mode: str):
         print(f"  {len(new_bets)} value bets today")
     started = {int(g) for g, s in zip(games["game_id"], games["state"])
                if s not in ("FUT", "PRE")}
-    bets = ledger.update_closing(bets, odds_by_game, started)
-    bets = ledger.grade(bets, games)
+    for step in (lambda b: ledger.update_closing(b, odds_by_game, started),
+                 lambda b: ledger.grade(b, games)):
+        try:
+            bets = step(bets)
+        except Exception as e:   # never let one step block the rest of the run
+            diag.note(f"Bet log step failed: {type(e).__name__}: {str(e)[:150]}")
     ledger.save_bets(bets)
     ledger.log_predictions(pred_rows)
 
