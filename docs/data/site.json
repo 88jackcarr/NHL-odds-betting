@@ -1,6 +1,6 @@
 {
- "updated": "Wed Oct 21, 3:06 PM CT",
- "run": "picks",
+ "updated": "Wed Oct 21, 6:06 PM CT",
+ "run": "close",
  "date": "2026-10-21",
  "has_odds": true,
  "diagnostics": [
@@ -10,7 +10,7 @@
   "Goalies: Daily Faceoff listed starters for 4 teams.",
   "Odds: loaded 14 NHL games with prices (14 listed by the API)."
  ],
- "odds_credits_left": "493",
+ "odds_credits_left": "492",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
@@ -25,7 +25,7 @@
    "time": "6:30 PM",
    "home": "BUF",
    "away": "PHI",
-   "state": "FUT",
+   "state": "PRE",
    "home_streak": -1,
    "away_streak": 2,
    "model_home": 0.71,
@@ -38,21 +38,21 @@
    "away_goalie_status": "Confirmed",
    "away_goalie_gsax": 0.025,
    "away_goalie_swap": -0.006,
-   "market_home": 0.6386,
-   "blend_home": 0.6743,
-   "best_home": -190,
-   "best_home_book": "BetRivers",
-   "best_away": 175,
-   "best_away_book": "BetOnline.ag",
-   "ev_home": 0.0292,
-   "ev_away": -0.1043
+   "market_home": 0.6489,
+   "blend_home": 0.6795,
+   "best_home": -200,
+   "best_home_book": "BetMGM",
+   "best_away": 180,
+   "best_away_book": "DraftKings",
+   "ev_home": 0.0192,
+   "ev_away": -0.1025
   },
   {
    "game_id": 2026020153,
    "time": "6:30 PM",
    "home": "OTT",
    "away": "FLA",
-   "state": "FUT",
+   "state": "PRE",
    "home_streak": -1,
    "away_streak": 3,
    "model_home": 0.4941,
@@ -67,12 +67,12 @@
    "away_goalie_swap": 0.128,
    "market_home": 0.5,
    "blend_home": 0.497,
-   "best_home": -106,
-   "best_home_book": "BetRivers",
-   "best_away": -107,
-   "best_away_book": "LowVig.ag",
-   "ev_home": -0.0341,
-   "ev_away": -0.027
+   "best_home": -107,
+   "best_home_book": "LowVig.ag",
+   "best_away": -103,
+   "best_away_book": "BetRivers",
+   "ev_home": -0.0384,
+   "ev_away": -0.0087
   }
  ],
  "record": {
