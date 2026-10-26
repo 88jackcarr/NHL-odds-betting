@@ -1,6 +1,6 @@
 {
- "updated": "Mon Oct 26, 11:36 AM CT",
- "run": "picks",
+ "updated": "Mon Oct 26, 6:10 PM CT",
+ "run": "close",
  "date": "2026-10-26",
  "has_odds": true,
  "diagnostics": [
@@ -10,7 +10,7 @@
   "Goalies: Daily Faceoff listed starters for 6 teams.",
   "Odds: loaded 14 NHL games with prices (14 listed by the API)."
  ],
- "odds_credits_left": "483",
+ "odds_credits_left": "482",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
@@ -25,7 +25,7 @@
    "time": "6:00 PM",
    "home": "NYR",
    "away": "LAK",
-   "state": "FUT",
+   "state": "LIVE",
    "home_streak": -2,
    "away_streak": -1,
    "model_home": 0.5799,
@@ -35,17 +35,17 @@
    "home_goalie_gsax": 0.0,
    "home_goalie_swap": -0.266,
    "away_goalie": "Darcy Kuemper",
-   "away_goalie_status": "Reported",
+   "away_goalie_status": "Confirmed",
    "away_goalie_gsax": -0.125,
    "away_goalie_swap": -0.064,
-   "market_home": 0.5427,
-   "blend_home": 0.5613,
+   "market_home": 0.5424,
+   "blend_home": 0.5612,
    "best_home": -125,
-   "best_home_book": "Bovada",
-   "best_away": 114,
-   "best_away_book": "LowVig.ag",
-   "ev_home": 0.0104,
-   "ev_away": -0.0613
+   "best_home_book": "LowVig.ag",
+   "best_away": 110,
+   "best_away_book": "DraftKings",
+   "ev_home": 0.0101,
+   "ev_away": -0.0784
   },
   {
    "game_id": 2026020186,
@@ -59,26 +59,26 @@
    "pick": {
     "team": "CGY",
     "side": "home",
-    "odds": 131,
-    "ev": 0.08,
-    "stake": 1.5
+    "odds": 120,
+    "ev": 0.0524,
+    "stake": 1.1
    },
    "home_goalie": "Devin Cooley",
    "home_goalie_status": "Confirmed",
    "home_goalie_gsax": 0.174,
    "home_goalie_swap": 0.141,
    "away_goalie": "Sergei Bobrovsky",
-   "away_goalie_status": "Reported",
+   "away_goalie_status": "Likely",
    "away_goalie_gsax": 0.017,
    "away_goalie_swap": -0.079,
-   "market_home": 0.4232,
-   "blend_home": 0.4675,
-   "best_home": 131,
-   "best_home_book": "LowVig.ag",
-   "best_away": -147,
-   "best_away_book": "Bovada",
-   "ev_home": 0.08,
-   "ev_away": -0.1053
+   "market_home": 0.4448,
+   "blend_home": 0.4783,
+   "best_home": 120,
+   "best_home_book": "Bovada",
+   "best_away": -130,
+   "best_away_book": "BetUS",
+   "ev_home": 0.0524,
+   "ev_away": -0.0771
   },
   {
    "game_id": 2026020187,
@@ -88,30 +88,30 @@
    "state": "FUT",
    "home_streak": -1,
    "away_streak": -1,
-   "model_home": 0.5217,
+   "model_home": 0.5216,
    "pick": {
     "team": "DET",
     "side": "away",
     "odds": 160,
-    "ev": 0.1143,
-    "stake": 1.8
+    "ev": 0.1262,
+    "stake": 2.0
    },
    "home_goalie": "Tristan Jarry",
-   "home_goalie_status": "Reported",
+   "home_goalie_status": "Confirmed",
    "home_goalie_gsax": -0.267,
    "home_goalie_swap": -0.218,
-   "away_goalie": "John Gibson",
-   "away_goalie_status": "Reported",
-   "away_goalie_gsax": -0.004,
-   "away_goalie_swap": -0.036,
-   "market_home": 0.6211,
-   "blend_home": 0.5714,
-   "best_home": -175,
-   "best_home_book": "LowVig.ag",
+   "away_goalie": "Michal Postava",
+   "away_goalie_status": "Confirmed",
+   "away_goalie_gsax": 0.0,
+   "away_goalie_swap": -0.032,
+   "market_home": 0.612,
+   "blend_home": 0.5668,
+   "best_home": -170,
+   "best_home_book": "BetUS",
    "best_away": 160,
-   "best_away_book": "Bovada",
-   "ev_home": -0.102,
-   "ev_away": 0.1143
+   "best_away_book": "BetRivers",
+   "ev_home": -0.0997,
+   "ev_away": 0.1262
   }
  ],
  "record": {
@@ -122,8 +122,8 @@
   "units_staked": 9.2,
   "units_profit": -3.35,
   "roi": -0.3639,
-  "avg_clv": -0.0171,
-  "beat_close_pct": 0.1
+  "avg_clv": -0.0097,
+  "beat_close_pct": 0.3
  },
  "bets": [
   {
@@ -141,8 +141,8 @@
    "ev": 0.1143,
    "stake": 1.8,
    "goalies": "John Gibson (Reported) @ Tristan Jarry (Reported)",
-   "close_fair": 0.3789,
-   "clv": -0.0149,
+   "close_fair": 0.388,
+   "clv": 0.0087,
    "result": null,
    "profit": null
   },
@@ -161,8 +161,8 @@
    "ev": 0.08,
    "stake": 1.5,
    "goalies": "Sergei Bobrovsky (Reported) @ Devin Cooley (Confirmed)",
-   "close_fair": 0.4232,
-   "clv": -0.0225,
+   "close_fair": 0.4448,
+   "clv": 0.0274,
    "result": null,
    "profit": null
   },
