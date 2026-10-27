@@ -7,5 +7,6 @@ logged_at,date,game_id,matchup,pick,side,book,odds,model_prob,market_prob,prob,e
 2026-10-22 11:21,2026-10-22,2026020162,MIN @ CGY,CGY,home,BetRivers,175,0.3997,0.3579,0.3788,0.0416,0.6,Jesper Wallstedt (Reported) @ Devin Cooley (Reported),0.3553,-0.023,W,1.05
 2026-10-22 11:21,2026-10-22,2026020163,CAR @ EDM,CAR,away,DraftKings,-118,0.6235,0.5217,0.5726,0.0578,1.7,Brandon Bussi (Reported) @ Devon Levi (Reported),0.5487,0.0137,L,-1.7
 2026-10-25 11:13,2026-10-25,2026020184,MIN @ VAN,MIN,away,BetRivers,-186,0.7058,0.6366,0.6712,0.0321,1.5,Calvin Pickard (Confirmed) @ Leevi Merilainen (Reported),0.6386,-0.0181,W,0.806
-2026-10-26 11:36,2026-10-26,2026020186,TOR @ CGY,CGY,home,LowVig.ag,131,0.5119,0.4232,0.4675,0.08,1.5,Sergei Bobrovsky (Reported) @ Devin Cooley (Confirmed),0.4448,0.0274,,
-2026-10-26 11:36,2026-10-26,2026020187,DET @ EDM,DET,away,Bovada,160,0.4783,0.3789,0.4286,0.1143,1.8,John Gibson (Reported) @ Tristan Jarry (Reported),0.388,0.0087,,
+2026-10-26 11:36,2026-10-26,2026020186,TOR @ CGY,CGY,home,LowVig.ag,131,0.5119,0.4232,0.4675,0.08,1.5,Sergei Bobrovsky (Reported) @ Devin Cooley (Confirmed),0.4448,0.0274,W,1.965
+2026-10-26 11:36,2026-10-26,2026020187,DET @ EDM,DET,away,Bovada,160,0.4783,0.3789,0.4286,0.1143,1.8,John Gibson (Reported) @ Tristan Jarry (Reported),0.388,0.0087,W,2.88
+2026-10-27 11:33,2026-10-27,2026020193,NJD @ DAL,NJD,away,BetRivers,108,0.5156,0.4774,0.4965,0.0328,0.8,Jake Allen (Reported) @ Casey DeSmith (Confirmed),0.4774,-0.0069,,
