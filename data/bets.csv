@@ -10,4 +10,8 @@ logged_at,date,game_id,matchup,pick,side,book,odds,model_prob,market_prob,prob,e
 2026-10-26 11:36,2026-10-26,2026020186,TOR @ CGY,CGY,home,LowVig.ag,131,0.5119,0.4232,0.4675,0.08,1.5,Sergei Bobrovsky (Reported) @ Devin Cooley (Confirmed),0.4448,0.0274,W,1.965
 2026-10-26 11:36,2026-10-26,2026020187,DET @ EDM,DET,away,Bovada,160,0.4783,0.3789,0.4286,0.1143,1.8,John Gibson (Reported) @ Tristan Jarry (Reported),0.388,0.0087,W,2.88
 2026-10-27 11:33,2026-10-27,2026020193,NJD @ DAL,NJD,away,BetRivers,108,0.5156,0.4774,0.4965,0.0328,0.8,Jake Allen (Reported) @ Casey DeSmith (Confirmed),0.4797,-0.0023,W,0.864
-2026-10-28 11:36,2026-10-28,2026020202,TOR @ SEA,SEA,home,Bovada,122,0.4976,0.4425,0.47,0.0435,0.9,Anthony Stolarz (Reported) @ Philipp Grubauer (Reported),0.4486,-0.004,,
+2026-10-28 11:36,2026-10-28,2026020202,TOR @ SEA,SEA,home,Bovada,122,0.4976,0.4425,0.47,0.0435,0.9,Anthony Stolarz (Reported) @ Philipp Grubauer (Reported),0.4486,-0.004,W,1.098
+2026-10-29 11:37,2026-10-29,2026020203,CHI @ DET,DET,home,BetOnline.ag,-153,0.6783,0.587,0.6326,0.0461,1.8,Spencer Knight (Likely) @ John Gibson (Confirmed),0.587,-0.0294,,
+2026-10-29 11:37,2026-10-29,2026020208,WSH @ NSH,NSH,home,MyBookie.ag,-105,0.5678,0.5,0.5339,0.0423,1.1,Charlie Lindgren (Reported) @ Juuse Saros (Confirmed),0.5,-0.0238,,
+2026-10-29 11:37,2026-10-29,2026020209,MTL @ DAL,MTL,away,BetOnline.ag,145,0.4473,0.3989,0.4231,0.0366,0.6,Jakub Dobes (Confirmed) @ Jake Oettinger (Confirmed),0.3989,-0.0227,,
+2026-10-29 11:37,2026-10-29,2026020213,VAN @ SJS,VAN,away,BetRivers,160,0.5078,0.3831,0.4455,0.1582,2.0,Leevi Merilainen (Reported) @ Yaroslav Askarov (Reported),0.3831,-0.0038,,
