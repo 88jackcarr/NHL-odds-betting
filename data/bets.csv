@@ -16,3 +16,6 @@ logged_at,date,game_id,matchup,pick,side,book,odds,model_prob,market_prob,prob,e
 2026-10-29 11:37,2026-10-29,2026020209,MTL @ DAL,MTL,away,BetOnline.ag,145,0.4473,0.3989,0.4231,0.0366,0.6,Jakub Dobes (Confirmed) @ Jake Oettinger (Confirmed),0.388,-0.0495,W,0.87
 2026-10-29 11:37,2026-10-29,2026020213,VAN @ SJS,VAN,away,BetRivers,160,0.5078,0.3831,0.4455,0.1582,2.0,Leevi Merilainen (Reported) @ Yaroslav Askarov (Reported),0.3923,0.0201,L,-2.0
 2026-10-30 11:33,2026-10-30,2026020216,SEA @ CGY,CGY,home,FanDuel,100,0.5458,0.4864,0.5161,0.0323,0.8,Joey Daccord (Reported) @ Dustin Wolf (Confirmed),0.4892,-0.0217,W,0.8
+2026-11-01 10:22,2026-11-01,2026020228,MIN @ WSH,MIN,away,BetRivers,-108,0.5834,0.5,0.5417,0.0433,1.2,Jesper Wallstedt (Confirmed) @ Logan Thompson (Reported),0.5,-0.037,,
+2026-11-01 10:22,2026-11-01,2026020229,UTA @ PHI,UTA,away,BetRivers,-162,0.6705,0.6106,0.6405,0.0359,1.5,Karel Vejmelka (Reported) @ Dan Vladar (Reported),0.6106,-0.0126,,
+2026-11-01 10:22,2026-11-01,2026020230,EDM @ NYR,NYR,home,BetRivers,-120,0.6207,0.5368,0.5787,0.061,1.8,Matt Tomkins (Confirmed) @ Dylan Garand (Confirmed),0.5368,-0.0159,,
