@@ -50,6 +50,16 @@
           display: flex; justify-content: space-between; flex-wrap: wrap; gap: 6px; font-size: 14px; }
   .pick b { color: var(--ice); }
   .nopick { margin-top: 12px; color: var(--muted); font-size: 13px; }
+  .tot { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--line); font-size: 13px;
+         display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px 10px; color: var(--muted); }
+  .tot b { color: var(--ink); font-weight: 600; }
+  .pick.tpick { margin-top: 8px; background: rgba(251,191,36,.1); }
+  .pick.tpick b { color: var(--gold); }
+  .game.has-tpick { border-color: var(--gold); }
+  .game.has-pick.has-tpick { border-color: var(--ice); }
+  .split { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-top: 10px; }
+  .split .card { padding: 10px 14px; font-size: 13px; color: var(--muted); }
+  .split .card b { color: var(--ink); }
 
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
   .tablewrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; }
@@ -82,6 +92,7 @@
 
   <h2>Results</h2>
   <div class="tiles" id="tiles"></div>
+  <div class="split" id="split"></div>
 
   <h2>Today's board</h2>
   <div class="games" id="games"></div>
@@ -95,6 +106,7 @@
     <div class="card" id="bt-calib"></div>
   </div>
   <div class="card" id="bt-features" style="margin-top:12px"></div>
+  <div class="card" id="bt-totals" style="margin-top:12px"></div>
 
   <footer>
     For research and entertainment. No model guarantees profit; sportsbooks hold a built-in margin and
@@ -131,13 +143,20 @@ function render(d) {
 
   const r = d.record;
   const tiles = [
-    ["Record", `${r.wins}-${r.losses}`], ["Units", signed(r.units_profit, 2), cls(r.units_profit)],
+    ["Record", `${r.wins}-${r.losses}${r.pushes ? `-${r.pushes}` : ""}`], ["Units", signed(r.units_profit, 2), cls(r.units_profit)],
     ["ROI", r.roi == null ? "–" : signed(r.roi * 100) + "%", cls(r.roi)],
     ["Avg CLV", r.avg_clv == null ? "–" : signed(r.avg_clv * 100) + "%", cls(r.avg_clv)],
     ["Beat close", pct(r.beat_close_pct, 0)], ["Pending", r.pending]
   ];
   document.getElementById("tiles").innerHTML = tiles.map(([k, v, c = ""]) =>
     `<div class="tile"><div class="k">${k}</div><div class="v ${c}">${v}</div></div>`).join("");
+
+  const bm = d.record_by_market || {};
+  document.getElementById("split").innerHTML = [["Moneyline", bm.moneyline], ["Over/under", bm.totals]]
+    .filter(([, m]) => m).map(([k, m]) => `<div class="card"><b>${k}:</b> ${m.wins}-${m.losses}${m.pushes ? `-${m.pushes}` : ""}
+      · <span class="num ${cls(m.units_profit)}">${signed(m.units_profit, 2)}u</span>
+      · ROI ${m.roi == null ? "–" : signed(m.roi * 100) + "%"} · CLV <span class="num ${cls(m.avg_clv)}">${m.avg_clv == null ? "–" : signed(m.avg_clv * 100) + "%"}</span>
+      · ${m.pending} pending</div>`).join("");
 
   const g = document.getElementById("games");
   g.innerHTML = d.games.length ? d.games.map(gameCard).join("") : `<div class="empty">No games today.</div>`;
@@ -150,11 +169,22 @@ function render(d) {
       <td class="r num">${odds(b.odds)}</td><td class="muted">${b.book}</td>
       <td class="r num">${b.stake}u</td><td class="r num">${pct(b.ev)}</td>
       <td class="r num ${cls(b.clv)}">${b.clv == null ? "–" : signed(b.clv * 100) + "%"}</td>
-      <td class="${b.result === "W" ? "good" : b.result === "L" ? "bad" : "muted"}">${b.result ?? "Pending"}</td>
+      <td class="${b.result === "W" ? "good" : b.result === "L" ? "bad" : "muted"}">${b.result === "P" ? "Push" : b.result ?? "Pending"}</td>
       <td class="r num ${cls(b.profit)}">${b.profit == null ? "" : signed(b.profit, 2)}</td></tr>`).join("")}`
     : `<tr><td class="empty">No bets logged yet.</td></tr>`;
 
   renderBacktest(d.backtest || {});
+  renderTotals(d.totals_backtest || {});
+}
+
+function renderTotals(tb) {
+  const el = document.getElementById("bt-totals");
+  if (!tb.lines) { el.innerHTML = ""; return; }
+  el.innerHTML = `<h3>Over/under model backtest (${tb.games} games, avg ${tb.avg_total} goals)</h3>
+    <table><tr><th>Line</th><th class="r">Over hit rate</th><th class="r">Log loss</th><th class="r">Baseline</th></tr>
+    ${Object.entries(tb.lines).map(([L, v]) => `<tr><td>${L}</td><td class="r num">${pct(v.over_rate)}</td>
+      <td class="r num">${v.log_loss}</td><td class="r num muted">${v.log_loss_baseline}</td></tr>`).join("")}
+    </table><p class="muted" style="font-size:13px">Lower log loss is better. ${tb.note}</p>`;
 }
 
 function gameCard(x) {
@@ -176,13 +206,23 @@ function gameCard(x) {
       ${gname ? `<div class="goalie">G: ${gname} · <span class="${gtag}">${gstat}</span>${gsax != null ? ` · <span class="num">${signed(gsax, 2)}</span> <span class="muted">GSAx/gm</span>` : ""}${swapTag}</div>` : ""}</div>`;
   };
   const p = x.pick;
-  return `<div class="game ${p ? "has-pick" : ""}">
+  const t = x.total;
+  const tp = t && t.pick;
+  const totRow = !t ? "" : t.line == null
+    ? `<div class="tot"><span>Model expects <b class="num">${t.expected.toFixed(1)}</b> goals</span><span>Waiting for O/U line</span></div>`
+    : `<div class="tot"><span>O/U <b class="num">${t.line}</b> · model <b class="num">${t.expected.toFixed(1)}</b> goals</span>
+        <span>Over: model <b class="num">${pct(t.model_over, 0)}</b> · market <span class="num">${pct(t.market_over, 0)}</span></span>
+        <span class="num">O ${odds(t.best_over)} / U ${odds(t.best_under)}</span></div>`;
+  return `<div class="game ${p ? "has-pick" : ""} ${tp ? "has-tpick" : ""}">
     <div class="top"><span>${x.time}</span><span>${x.away} @ ${x.home}</span></div>
     <div class="row head"><div>Team</div><div>Model</div><div>Market</div><div>Best</div></div>
     ${side(x.away, false)}${side(x.home, true)}
     ${p ? `<div class="pick"><span><b>Value: ${p.team} ${odds(p.odds)}</b> at ${p.side === "home" ? x.best_home_book : x.best_away_book}</span>
       <span class="num">EV ${pct(p.ev)} · ${p.stake}u</span></div>`
-      : `<div class="nopick">${has ? "No edge at current prices" : "Waiting for odds"}</div>`}
+      : `<div class="nopick">${has ? "No moneyline edge at current prices" : "Waiting for odds"}</div>`}
+    ${totRow}
+    ${tp ? `<div class="pick tpick"><span><b>Value: ${tp.label} ${odds(tp.odds)}</b> at ${tp.book}</span>
+      <span class="num">EV ${pct(tp.ev)} · ${tp.stake}u</span></div>` : ""}
   </div>`;
 }
 

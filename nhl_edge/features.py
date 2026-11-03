@@ -18,6 +18,12 @@ BASE_FEATURES = ["elo_diff", "gd_season_diff", "gd_l10_diff", "win_l10_diff",
 XG_FEATURES = ["xg_season_diff", "xg_l10_diff", "xg5_l10_diff"]
 GOALIE_FEATURES = ["goalie_swap_diff"]   # tonight's starter vs. the team's usual starter
 
+# Over/under model: scoring and chance-creation rates for both teams.
+TOTAL_BASE = ["naive_total", "home_gf", "home_ga", "away_gf", "away_ga", "league_gpg",
+              "home_goalie", "away_goalie", "home_b2b", "away_b2b"]
+TOTAL_XG = ["xg_total", "home_xgf", "home_xga", "away_xgf", "away_xga"]
+RATE_ALPHA = 0.06        # recent-form weight for scoring rates (~last 15-20 games)
+
 LEAGUE_SV = 0.903        # used for goals saved above average when xG is missing
 GOALIE_PRIOR = 12.0      # a goalie's rating is pulled toward average until ~this many games
 GOALIE_DECAY = 0.985     # older games count less (half weight after ~45 games)
@@ -41,6 +47,8 @@ class TeamState:
     def __init__(self, elo=1500.0):
         self.elo = elo
         self.season = None
+        # Smoothed per-game rates that carry across seasons (pulled to average each summer).
+        self.rate = {"gf": 3.0, "ga": 3.0, "xgf": 3.0, "xga": 3.0}
         self.reset_season()
 
     def reset_season(self):
@@ -72,9 +80,13 @@ class TeamState:
             "xg_season": share(self.xg_for + 2.5 * k, self.xg_against + 2.5 * k),
             "xg_l10": share(sum(x[0] for x in xg10) + 7.5, sum(x[1] for x in xg10) + 7.5),
             "xg5_l10": share(sum(x[2] for x in xg10) + 5, sum(x[3] for x in xg10) + 5),
+            **{f"r_{k}": v for k, v in self.rate.items()},
         }
 
     def update(self, game_date, gf, ga, xg=None):
+        a = RATE_ALPHA
+        self.rate["gf"] += a * (gf - self.rate["gf"])
+        self.rate["ga"] += a * (ga - self.rate["ga"])
         win = int(gf > ga)
         self.n += 1
         self.gd_sum += gf - ga
@@ -86,6 +98,8 @@ class TeamState:
             self.xg_against += xg[1]
             self.xg_n += 1
             self.xg10.append(xg)
+            self.rate["xgf"] += a * (xg[0] - self.rate["xgf"])
+            self.rate["xga"] += a * (xg[1] - self.rate["xga"])
 
 
 def _elo_update(h, a, home_win, gd, overtime):
@@ -110,7 +124,8 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
                 starter_of[key] = int(r.goalie_id)
     goalies = defaultdict(GoalieState)
     team_goalie = {}   # decayed average rating of each team's recent starters
-    league = {"mean": 0.0}   # running league-average saves above xG, so 0 = average goalie
+    league = {"mean": 0.0,   # running league-average saves above xG, so 0 = average goalie
+              "gpg": 3.0}    # running league goals per team per game
 
     xg_lookup = {}
     if xg is not None and len(xg):
@@ -127,6 +142,8 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
                 t.elo = config.ELO_SEASON_CARRY * t.elo + (1 - config.ELO_SEASON_CARRY) * 1500
                 t.season = g.season
                 t.reset_season()
+                for k in t.rate:
+                    t.rate[k] = 0.6 * t.rate[k] + 0.4 * league["gpg"]
 
         hs, as_ = h.snapshot(gdate), a.snapshot(gdate)
         gk = {}
@@ -150,6 +167,13 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
             "streak_diff": float(np.clip(hs["streak"], -6, 6) - np.clip(as_["streak"], -6, 6)),
             "rest_diff": hs["rest"] - as_["rest"],
             "home_goalie": gk[g.home], "away_goalie": gk[g.away],
+            "home_gf": hs["r_gf"], "home_ga": hs["r_ga"], "away_gf": as_["r_gf"], "away_ga": as_["r_ga"],
+            "home_xgf": hs["r_xgf"], "home_xga": hs["r_xga"],
+            "away_xgf": as_["r_xgf"], "away_xga": as_["r_xga"],
+            "naive_total": (hs["r_gf"] + as_["r_ga"] + as_["r_gf"] + hs["r_ga"]) / 2,
+            "xg_total": (hs["r_xgf"] + as_["r_xga"] + as_["r_xgf"] + hs["r_xga"]) / 2,
+            "league_gpg": league["gpg"],
+            "total_goals": np.nan,
             "goalie_diff": gk[g.home] - gk[g.away],
             "home_goalie_swap": swap[g.home], "away_goalie_swap": swap[g.away],
             "goalie_swap_diff": swap[g.home] - swap[g.away],
@@ -166,6 +190,8 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
                     team_goalie[t] = 0.85 * team_goalie.get(t, gk[t]) + 0.15 * gk[t]
             hg, ag = int(g.home_score), int(g.away_score)
             row["home_win"] = int(hg > ag)
+            row["total_goals"] = hg + ag
+            league["gpg"] = 0.995 * league["gpg"] + 0.005 * (hg + ag) / 2
             ot = g.last_period in ("OT", "SO")
             _elo_update(h, a, int(hg > ag), hg - ag, ot)
             for team in (g.home, g.away):

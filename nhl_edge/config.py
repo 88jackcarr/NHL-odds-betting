@@ -28,6 +28,11 @@ MAX_DOG_ODDS = 250       # skip big underdogs (above +250); too noisy
 KELLY_FRACTION = 0.25    # quarter Kelly
 MAX_STAKE_UNITS = 2.0    # never more than 2 units (2% of bankroll) on one game
 
+# --- Over/unders (harder to predict, so the model gets less say and needs a bigger edge) ---
+TOTAL_MODEL_WEIGHT = 0.35
+TOTAL_MIN_EV = 0.04
+TOTAL_MAX_STAKE = 1.5
+
 # --- Optional expected-goals data (MoneyPuck). Skipped automatically if unavailable. ---
 MONEYPUCK_TEAM_URL = (
     "https://moneypuck.com/moneypuck/playerData/careers/gameByGame/regular/teams/{team}.csv"

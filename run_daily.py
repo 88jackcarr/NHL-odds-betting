@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 
 import pandas as pd
 
-from nhl_edge import config, diag, ledger, model
+from nhl_edge import config, diag, ledger, model, totals
 from nhl_edge.features import build_features
 from nhl_edge.goalies import todays_starters, update_goalie_games
 from nhl_edge.nhl_api import update_games
@@ -37,6 +37,15 @@ def _evaluate(p_side, american):
     kelly = max(ev / (d - 1), 0)
     stake = min(config.KELLY_FRACTION * kelly * 100, config.MAX_STAKE_UNITS)
     return ev, round(stake, 1)
+
+
+def _evaluate_total(q_side, p_push, american, max_stake):
+    """EV and stake for an over/under side; q_side = chance of winning if it doesn't push."""
+    d = american_to_decimal(american)
+    p_win, p_lose = q_side * (1 - p_push), (1 - q_side) * (1 - p_push)
+    ev = p_win * (d - 1) - p_lose
+    kelly = max(ev / (d - 1), 0)
+    return ev, round(min(config.KELLY_FRACTION * kelly * 100, max_stake), 1)
 
 
 def main(mode: str):
@@ -78,8 +87,19 @@ def main(mode: str):
     clf = model.fit(train, features)
     bt = model.backtest(feats, features)
 
+    print("Training the over/under model...")
+    tfeatures = totals.choose_total_features(any(f.startswith("xg") for f in features))
+    ttrain = feats.dropna(subset=["total_goals"]).iloc[config.BURN_IN_GAMES:]
+    tmodel = totals.TotalsModel().fit(ttrain, tfeatures)
+    tbt = totals.backtest(feats, tfeatures)
+
     upcoming = feats[(feats["date"] == today.isoformat())].copy()
     upcoming["model_home"] = model.predict(clf, upcoming, features) if len(upcoming) else []
+    curves, exp_total = {}, {}
+    if len(upcoming):
+        for gid, c, mu in zip(upcoming["game_id"], tmodel.curve(upcoming),
+                              tmodel.expected(upcoming)):
+            curves[int(gid)], exp_total[int(gid)] = c, float(mu)
 
     print("Fetching odds...")
     odds, credits = fetch_odds()
@@ -128,6 +148,42 @@ def main(mode: str):
                     "model_prob": round(r["model_home"] if side == "home" else 1 - r["model_home"], 4),
                     "market_prob": round(o["market_home"] if side == "home" else 1 - o["market_home"], 4),
                     "prob": round(p_home if side == "home" else 1 - p_home, 4),
+                    "ev": round(ev, 4), "stake": stake, "market": "ML", "line": None,
+                    "goalies": f"{g['away_goalie'] or '?'} ({g['away_goalie_status'] or '-'}) @ "
+                               f"{g['home_goalie'] or '?'} ({g['home_goalie_status'] or '-'})"})
+        gid = int(r["game_id"])
+        g["total"] = None
+        if gid in curves:
+            g["total"] = {"expected": round(exp_total[gid], 2), "pick": None}
+        if o and o.get("total") and gid in curves:
+            t = o["total"]
+            p_over, p_under, p_push = totals.line_probs(curves[gid], t["line"])
+            q_model = p_over / max(p_over + p_under, 1e-9)
+            w = config.TOTAL_MODEL_WEIGHT
+            q = w * q_model + (1 - w) * t["market_over"]
+            ev_o, st_o = _evaluate_total(q, p_push, t["best_over"], config.TOTAL_MAX_STAKE)
+            ev_u, st_u = _evaluate_total(1 - q, p_push, t["best_under"], config.TOTAL_MAX_STAKE)
+            g["total"].update({"line": t["line"], "model_over": round(q_model, 4),
+                               "market_over": round(t["market_over"], 4), "blend_over": round(q, 4),
+                               "push": round(p_push, 3),
+                               "best_over": t["best_over"], "best_over_book": t["best_over_book"],
+                               "best_under": t["best_under"], "best_under_book": t["best_under_book"],
+                               "ev_over": round(ev_o, 4), "ev_under": round(ev_u, 4)})
+            side, ev, stake = ("over", ev_o, st_o) if ev_o >= ev_u else ("under", ev_u, st_u)
+            price = t[f"best_{side}"]
+            if ev >= config.TOTAL_MIN_EV and stake >= 0.1 and r["state"] in ("FUT", "PRE"):
+                label = f"{side.title()} {t['line']:g}"
+                g["total"]["pick"] = {"label": label, "side": side, "odds": int(price),
+                                      "ev": round(ev, 4), "stake": stake,
+                                      "book": t[f"best_{side}_book"]}
+                new_bets.append({
+                    "logged_at": now.astimezone(CT).strftime("%Y-%m-%d %H:%M"),
+                    "date": r["date"], "game_id": gid, "market": "Total", "line": t["line"],
+                    "matchup": f"{r['away']} @ {r['home']}", "pick": label, "side": side,
+                    "book": t[f"best_{side}_book"], "odds": int(price),
+                    "model_prob": round(q_model if side == "over" else 1 - q_model, 4),
+                    "market_prob": round(t["market_over"] if side == "over" else 1 - t["market_over"], 4),
+                    "prob": round(q if side == "over" else 1 - q, 4),
                     "ev": round(ev, 4), "stake": stake,
                     "goalies": f"{g['away_goalie'] or '?'} ({g['away_goalie_status'] or '-'}) @ "
                                f"{g['home_goalie'] or '?'} ({g['home_goalie_status'] or '-'})"})
@@ -140,7 +196,7 @@ def main(mode: str):
         print(f"  {len(new_bets)} value bets today")
     started = {int(g) for g, s in zip(games["game_id"], games["state"])
                if s not in ("FUT", "PRE")}
-    for step in (lambda b: ledger.update_closing(b, odds_by_game, started),
+    for step in (lambda b: ledger.update_closing(b, odds_by_game, started, curves),
                  lambda b: ledger.grade(b, games)):
         try:
             bets = step(bets)
@@ -159,11 +215,15 @@ def main(mode: str):
         "goalies_used": "goalie_swap_diff" in features,
         "settings": {"model_weight": config.MODEL_WEIGHT, "min_ev": config.MIN_EV,
                      "kelly_fraction": config.KELLY_FRACTION,
-                     "max_stake": config.MAX_STAKE_UNITS},
+                     "max_stake": config.MAX_STAKE_UNITS,
+                     "total_model_weight": config.TOTAL_MODEL_WEIGHT,
+                     "total_min_ev": config.TOTAL_MIN_EV},
         "games": games_out,
         "record": ledger.summary(bets),
+        "record_by_market": ledger.summary_by_market(bets),
         "bets": recent_bets.to_dict("records"),
         "backtest": bt,
+        "totals_backtest": tbt,
     }
     config.SITE_DATA_DIR.mkdir(parents=True, exist_ok=True)
     (config.SITE_DATA_DIR / "site.json").write_text(json.dumps(site, indent=1, default=str))
