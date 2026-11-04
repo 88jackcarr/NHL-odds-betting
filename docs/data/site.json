@@ -1,16 +1,18 @@
 {
- "updated": "Tue Nov 3, 12:47 PM CT",
- "run": "picks",
+ "updated": "Tue Nov 3, 5:21 PM CT",
+ "run": "close",
  "date": "2026-11-03",
  "has_odds": true,
  "diagnostics": [
-  "xG: loaded MoneyPuck data for 33 teams (latest game id 2026020235).",
-  "xG coverage of recent games: 100% (needs 75% to be used).",
+  "xG: MoneyPuck failed for 1 teams, e.g. WPG: ChunkedEncodingError Response ended prematurely",
+  "xG: loaded MoneyPuck data for 32 teams (latest game id 2026020235).",
+  "xG: lowest team coverage: WPG 0%, ANA 100%, BUF 100%, BOS 100%, CBJ 100%",
+  "xG coverage of recent games: 97% (needs 75% to be used).",
   "Goalies: starter known for 100% of recent games (needs 75% to be used).",
   "Goalies: Daily Faceoff listed starters for 22 teams.",
   "Odds: loaded 15 NHL games with prices (15 listed by the API), 15 with over/under lines."
  ],
- "odds_credits_left": "493",
+ "odds_credits_left": "491",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
@@ -30,38 +32,38 @@
    "state": "FUT",
    "home_streak": 1,
    "away_streak": -1,
-   "model_home": 0.4051,
+   "model_home": 0.4082,
    "pick": null,
    "home_goalie": "Sergei Bobrovsky",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": -0.006,
-   "home_goalie_swap": -0.099,
+   "home_goalie_gsax": 0.003,
+   "home_goalie_swap": -0.098,
    "away_goalie": "Sebastian Cossa",
    "away_goalie_status": "Confirmed",
-   "away_goalie_gsax": -0.234,
-   "away_goalie_swap": -0.144,
-   "market_home": 0.4365,
-   "blend_home": 0.4208,
-   "best_home": 123,
+   "away_goalie_gsax": -0.23,
+   "away_goalie_swap": -0.149,
+   "market_home": 0.4268,
+   "blend_home": 0.4175,
+   "best_home": 128,
    "best_home_book": "LowVig.ag",
-   "best_away": -137,
-   "best_away_book": "BetRivers",
-   "ev_home": -0.0616,
-   "ev_away": 0.0019,
+   "best_away": -145,
+   "best_away_book": "LowVig.ag",
+   "ev_home": -0.0481,
+   "ev_away": -0.0158,
    "total": {
-    "expected": 6.56,
+    "expected": 6.57,
     "pick": null,
     "line": 6.5,
-    "model_over": 0.528,
-    "market_over": 0.5508,
-    "blend_over": 0.5428,
+    "model_over": 0.5311,
+    "market_over": 0.5632,
+    "blend_over": 0.5519,
     "push": 0.0,
-    "best_over": -128,
-    "best_over_book": "MyBookie.ag",
-    "best_under": 115,
-    "best_under_book": "LowVig.ag",
-    "ev_over": -0.0331,
-    "ev_under": -0.0171
+    "best_over": -140,
+    "best_over_book": "LowVig.ag",
+    "best_under": 122,
+    "best_under_book": "Bovada",
+    "ev_over": -0.0538,
+    "ev_under": -0.0053
    }
   },
   {
@@ -72,38 +74,38 @@
    "state": "FUT",
    "home_streak": 5,
    "away_streak": -9,
-   "model_home": 0.6287,
+   "model_home": 0.5845,
    "pick": null,
    "home_goalie": "Jacob Fowler",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": 0.421,
-   "home_goalie_swap": 0.184,
+   "home_goalie_gsax": 0.433,
+   "home_goalie_swap": 0.185,
    "away_goalie": "Stuart Skinner",
-   "away_goalie_status": "Reported",
-   "away_goalie_gsax": 0.004,
-   "away_goalie_swap": -0.045,
-   "market_home": 0.6018,
-   "blend_home": 0.6152,
-   "best_home": -163,
-   "best_home_book": "LowVig.ag",
-   "best_away": 145,
-   "best_away_book": "DraftKings",
-   "ev_home": -0.0073,
-   "ev_away": -0.0573,
+   "away_goalie_status": "Confirmed",
+   "away_goalie_gsax": -0.056,
+   "away_goalie_swap": -0.052,
+   "market_home": 0.604,
+   "blend_home": 0.5942,
+   "best_home": -164,
+   "best_home_book": "FanDuel",
+   "best_away": 146,
+   "best_away_book": "BetUS",
+   "ev_home": -0.0434,
+   "ev_away": -0.0018,
    "total": {
-    "expected": 6.16,
+    "expected": 6.04,
     "pick": null,
     "line": 6.0,
-    "model_over": 0.513,
-    "market_over": 0.4978,
-    "blend_over": 0.5032,
-    "push": 0.113,
+    "model_over": 0.4956,
+    "market_over": 0.5,
+    "blend_over": 0.4985,
+    "push": 0.109,
     "best_over": -105,
     "best_over_book": "BetMGM",
-    "best_under": -108,
-    "best_under_book": "LowVig.ag",
-    "ev_over": -0.0157,
-    "ev_under": -0.0382
+    "best_under": -105,
+    "best_under_book": "Bovada",
+    "ev_over": -0.0239,
+    "ev_under": -0.0186
    }
   },
   {
@@ -114,38 +116,38 @@
    "state": "FUT",
    "home_streak": -1,
    "away_streak": 1,
-   "model_home": 0.6976,
+   "model_home": 0.6974,
    "pick": null,
    "home_goalie": "Andrei Vasilevskiy",
-   "home_goalie_status": "Reported",
-   "home_goalie_gsax": 0.107,
-   "home_goalie_swap": -0.049,
+   "home_goalie_status": "Confirmed",
+   "home_goalie_gsax": 0.117,
+   "home_goalie_swap": -0.048,
    "away_goalie": "John Gibson",
-   "away_goalie_status": "Reported",
-   "away_goalie_gsax": -0.021,
-   "away_goalie_swap": -0.036,
-   "market_home": 0.6986,
-   "blend_home": 0.6981,
-   "best_home": -257,
-   "best_home_book": "LowVig.ag",
-   "best_away": 225,
-   "best_away_book": "BetMGM",
-   "ev_home": -0.0302,
-   "ev_away": -0.0189,
+   "away_goalie_status": "Confirmed",
+   "away_goalie_gsax": -0.01,
+   "away_goalie_swap": -0.034,
+   "market_home": 0.7115,
+   "blend_home": 0.7045,
+   "best_home": -275,
+   "best_home_book": "BetUS",
+   "best_away": 242,
+   "best_away_book": "LowVig.ag",
+   "ev_home": -0.0393,
+   "ev_away": 0.0106,
    "total": {
-    "expected": 6.23,
+    "expected": 6.25,
     "pick": null,
     "line": 6.0,
-    "model_over": 0.528,
-    "market_over": 0.5201,
-    "blend_over": 0.5229,
+    "model_over": 0.532,
+    "market_over": 0.5054,
+    "blend_over": 0.5147,
     "push": 0.106,
-    "best_over": -115,
-    "best_over_book": "BetUS",
-    "best_under": 101,
-    "best_under_book": "LowVig.ag",
-    "ev_over": -0.0201,
-    "ev_under": -0.0366
+    "best_over": -108,
+    "best_over_book": "LowVig.ag",
+    "best_under": -102,
+    "best_under_book": "BetMGM",
+    "ev_over": -0.0078,
+    "ev_under": -0.0348
    }
   },
   {
@@ -160,34 +162,34 @@
    "pick": null,
    "home_goalie": "Dylan Garand",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": 0.162,
-   "home_goalie_swap": -0.053,
+   "home_goalie_gsax": 0.169,
+   "home_goalie_swap": -0.052,
    "away_goalie": "Joel Hofer",
    "away_goalie_status": "Confirmed",
-   "away_goalie_gsax": 0.16,
-   "away_goalie_swap": 0.101,
+   "away_goalie_gsax": 0.17,
+   "away_goalie_swap": 0.102,
    "market_home": 0.5217,
    "blend_home": 0.5211,
    "best_home": -117,
-   "best_home_book": "LowVig.ag",
-   "best_away": 103,
+   "best_home_book": "MyBookie.ag",
+   "best_away": 107,
    "best_away_book": "LowVig.ag",
-   "ev_home": -0.0335,
-   "ev_away": -0.0278,
+   "ev_home": -0.0334,
+   "ev_away": -0.0088,
    "total": {
-    "expected": 6.16,
+    "expected": 6.17,
     "pick": null,
     "line": 6.0,
-    "model_over": 0.5068,
-    "market_over": 0.5,
-    "blend_over": 0.5024,
-    "push": 0.115,
-    "best_over": -106,
-    "best_over_book": "MyBookie.ag",
-    "best_under": -108,
-    "best_under_book": "LowVig.ag",
-    "ev_over": -0.021,
-    "ev_under": -0.0368
+    "model_over": 0.5084,
+    "market_over": 0.4806,
+    "blend_over": 0.4903,
+    "push": 0.114,
+    "best_over": 104,
+    "best_over_book": "LowVig.ag",
+    "best_under": -110,
+    "best_under_book": "BetMGM",
+    "ev_over": 0.0002,
+    "ev_under": -0.0239
    }
   },
   {
@@ -198,44 +200,44 @@
    "state": "FUT",
    "home_streak": 1,
    "away_streak": 1,
-   "model_home": 0.2898,
+   "model_home": 0.2908,
    "pick": {
     "team": "MIN",
     "side": "away",
     "odds": -175,
-    "ev": 0.0449,
-    "stake": 2.0
+    "ev": 0.0421,
+    "stake": 1.8
    },
    "home_goalie": "Dan Vladar",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": 0.028,
-   "home_goalie_swap": -0.014,
+   "home_goalie_gsax": 0.039,
+   "home_goalie_swap": -0.013,
    "away_goalie": "Jesper Wallstedt",
    "away_goalie_status": "Confirmed",
-   "away_goalie_gsax": 0.092,
-   "away_goalie_swap": 0.097,
-   "market_home": 0.3803,
-   "blend_home": 0.3351,
-   "best_home": 155,
-   "best_home_book": "LowVig.ag",
+   "away_goalie_gsax": 0.104,
+   "away_goalie_swap": 0.098,
+   "market_home": 0.3829,
+   "blend_home": 0.3368,
+   "best_home": 158,
+   "best_home_book": "Bovada",
    "best_away": -175,
-   "best_away_book": "BetUS",
-   "ev_home": -0.1456,
-   "ev_away": 0.0449,
+   "best_away_book": "LowVig.ag",
+   "ev_home": -0.1309,
+   "ev_away": 0.0421,
    "total": {
     "expected": 6.01,
     "pick": null,
     "line": 5.5,
-    "model_over": 0.5527,
-    "market_over": 0.5427,
-    "blend_over": 0.5462,
+    "model_over": 0.5528,
+    "market_over": 0.5394,
+    "blend_over": 0.5441,
     "push": 0.0,
-    "best_over": -130,
-    "best_over_book": "DraftKings",
-    "best_under": 113,
+    "best_over": -124,
+    "best_over_book": "FanDuel",
+    "best_under": 111,
     "best_under_book": "LowVig.ag",
-    "ev_over": -0.0336,
-    "ev_under": -0.0335
+    "ev_over": -0.0171,
+    "ev_under": -0.0381
    }
   },
   {
@@ -246,38 +248,38 @@
    "state": "FUT",
    "home_streak": -2,
    "away_streak": -2,
-   "model_home": 0.5356,
+   "model_home": 0.5384,
    "pick": null,
    "home_goalie": "Arturs Silovs",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": -0.216,
-   "home_goalie_swap": -0.014,
+   "home_goalie_gsax": -0.206,
+   "home_goalie_swap": -0.012,
    "away_goalie": "Adin Hill",
-   "away_goalie_status": "Reported",
-   "away_goalie_gsax": -0.196,
-   "away_goalie_swap": -0.053,
-   "market_home": 0.511,
-   "blend_home": 0.5233,
-   "best_home": -110,
-   "best_home_book": "FanDuel",
-   "best_away": 101,
+   "away_goalie_status": "Confirmed",
+   "away_goalie_gsax": -0.187,
+   "away_goalie_swap": -0.052,
+   "market_home": 0.5198,
+   "blend_home": 0.5291,
+   "best_home": -116,
+   "best_home_book": "BetOnline.ag",
+   "best_away": 102,
    "best_away_book": "BetOnline.ag",
-   "ev_home": -0.001,
-   "ev_away": -0.0418,
+   "ev_home": -0.0148,
+   "ev_away": -0.0488,
    "total": {
-    "expected": 6.34,
+    "expected": 6.33,
     "pick": null,
     "line": 6.5,
-    "model_over": 0.5018,
-    "market_over": 0.5261,
-    "blend_over": 0.5176,
+    "model_over": 0.5025,
+    "market_over": 0.5251,
+    "blend_over": 0.5172,
     "push": 0.0,
     "best_over": -120,
     "best_over_book": "DraftKings",
-    "best_under": 105,
-    "best_under_book": "BetRivers",
-    "ev_over": -0.0511,
-    "ev_under": -0.011
+    "best_under": 106,
+    "best_under_book": "BetOnline.ag",
+    "ev_over": -0.0518,
+    "ev_under": -0.0055
    }
   },
   {
@@ -288,38 +290,38 @@
    "state": "FUT",
    "home_streak": -1,
    "away_streak": 1,
-   "model_home": 0.5167,
+   "model_home": 0.5185,
    "pick": null,
    "home_goalie": "Logan Thompson",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": 0.304,
-   "home_goalie_swap": 0.146,
+   "home_goalie_gsax": 0.315,
+   "home_goalie_swap": 0.147,
    "away_goalie": "Jake Oettinger",
    "away_goalie_status": "Confirmed",
-   "away_goalie_gsax": 0.088,
-   "away_goalie_swap": 0.014,
-   "market_home": 0.5,
-   "blend_home": 0.5083,
-   "best_home": -102,
-   "best_home_book": "LowVig.ag",
-   "best_away": -108,
-   "best_away_book": "DraftKings",
-   "ev_home": 0.0067,
-   "ev_away": -0.0531,
+   "away_goalie_gsax": 0.098,
+   "away_goalie_swap": 0.015,
+   "market_home": 0.5114,
+   "blend_home": 0.515,
+   "best_home": -112,
+   "best_home_book": "Bovada",
+   "best_away": 101,
+   "best_away_book": "LowVig.ag",
+   "ev_home": -0.0252,
+   "ev_away": -0.0251,
    "total": {
-    "expected": 6.04,
+    "expected": 6.06,
     "pick": null,
     "line": 5.5,
-    "model_over": 0.5533,
-    "market_over": 0.5267,
-    "blend_over": 0.536,
+    "model_over": 0.5559,
+    "market_over": 0.5293,
+    "blend_over": 0.5386,
     "push": 0.0,
     "best_over": -118,
-    "best_over_book": "MyBookie.ag",
-    "best_under": 105,
-    "best_under_book": "DraftKings",
-    "ev_over": -0.0098,
-    "ev_under": -0.0488
+    "best_over_book": "FanDuel",
+    "best_under": 107,
+    "best_under_book": "LowVig.ag",
+    "ev_over": -0.005,
+    "ev_under": -0.0449
    }
   },
   {
@@ -330,38 +332,38 @@
    "state": "FUT",
    "home_streak": -2,
    "away_streak": 3,
-   "model_home": 0.4385,
+   "model_home": 0.4387,
    "pick": null,
    "home_goalie": "Cam Talbot",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": -0.072,
-   "home_goalie_swap": -0.143,
+   "home_goalie_gsax": -0.064,
+   "home_goalie_swap": -0.146,
    "away_goalie": "Scott Wedgewood",
    "away_goalie_status": "Confirmed",
-   "away_goalie_gsax": 0.052,
+   "away_goalie_gsax": 0.061,
    "away_goalie_swap": -0.008,
-   "market_home": 0.4721,
-   "blend_home": 0.4553,
-   "best_home": 106,
-   "best_home_book": "FanDuel",
-   "best_away": -113,
-   "best_away_book": "BetOnline.ag",
-   "ev_home": -0.0621,
-   "ev_away": 0.0268,
+   "market_home": 0.4671,
+   "blend_home": 0.4529,
+   "best_home": 108,
+   "best_home_book": "BetOnline.ag",
+   "best_away": -120,
+   "best_away_book": "BetUS",
+   "ev_home": -0.058,
+   "ev_away": 0.003,
    "total": {
     "expected": 6.14,
     "pick": null,
-    "line": 6.0,
-    "model_over": 0.5038,
-    "market_over": 0.5217,
-    "blend_over": 0.5155,
-    "push": 0.1,
-    "best_over": -118,
-    "best_over_book": "BetMGM",
-    "best_under": 104,
-    "best_under_book": "BetOnline.ag",
-    "ev_over": -0.0429,
-    "ev_under": -0.0104
+    "line": 6.5,
+    "model_over": 0.4539,
+    "market_over": 0.4739,
+    "blend_over": 0.4669,
+    "push": 0.0,
+    "best_over": 109,
+    "best_over_book": "BetOnline.ag",
+    "best_under": -120,
+    "best_under_book": "FanDuel",
+    "ev_over": -0.0242,
+    "ev_under": -0.0226
    }
   },
   {
@@ -372,38 +374,38 @@
    "state": "FUT",
    "home_streak": 1,
    "away_streak": 3,
-   "model_home": 0.6103,
+   "model_home": 0.6022,
    "pick": null,
    "home_goalie": "Connor Hellebuyck",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": 0.047,
-   "home_goalie_swap": 0.018,
+   "home_goalie_gsax": -0.262,
+   "home_goalie_swap": -0.214,
    "away_goalie": "Tristan Jarry",
    "away_goalie_status": "Confirmed",
-   "away_goalie_gsax": -0.198,
-   "away_goalie_swap": -0.093,
-   "market_home": 0.5872,
-   "blend_home": 0.5987,
-   "best_home": -151,
-   "best_home_book": "LowVig.ag",
-   "best_away": 135,
-   "best_away_book": "BetMGM",
-   "ev_home": -0.0048,
-   "ev_away": -0.057,
+   "away_goalie_gsax": -0.189,
+   "away_goalie_swap": -0.089,
+   "market_home": 0.5912,
+   "blend_home": 0.5967,
+   "best_home": -155,
+   "best_home_book": "Bovada",
+   "best_away": 138,
+   "best_away_book": "BetUS",
+   "ev_home": -0.0183,
+   "ev_away": -0.0402,
    "total": {
-    "expected": 6.24,
+    "expected": 6.32,
     "pick": null,
     "line": 6.0,
-    "model_over": 0.5126,
-    "market_over": 0.5108,
-    "blend_over": 0.5114,
-    "push": 0.109,
+    "model_over": 0.5377,
+    "market_over": 0.5134,
+    "blend_over": 0.5219,
+    "push": 0.117,
     "best_over": -114,
     "best_over_book": "LowVig.ag",
     "best_under": -102,
     "best_under_book": "LowVig.ag",
-    "ev_over": -0.0356,
-    "ev_under": -0.0289
+    "ev_over": -0.0179,
+    "ev_under": -0.0469
    }
   },
   {
@@ -414,38 +416,38 @@
    "state": "FUT",
    "home_streak": 1,
    "away_streak": 4,
-   "model_home": 0.3275,
+   "model_home": 0.327,
    "pick": null,
    "home_goalie": "Juuse Saros",
    "home_goalie_status": "Confirmed",
-   "home_goalie_gsax": -0.119,
-   "home_goalie_swap": -0.099,
+   "home_goalie_gsax": -0.109,
+   "home_goalie_swap": -0.098,
    "away_goalie": "Pyotr Kochetkov",
-   "away_goalie_status": "Reported",
-   "away_goalie_gsax": 0.025,
+   "away_goalie_status": "Likely",
+   "away_goalie_gsax": 0.033,
    "away_goalie_swap": 0.086,
-   "market_home": 0.3614,
-   "blend_home": 0.3445,
-   "best_home": 170,
-   "best_home_book": "LowVig.ag",
-   "best_away": -194,
-   "best_away_book": "LowVig.ag",
-   "ev_home": -0.0699,
-   "ev_away": -0.0066,
+   "market_home": 0.3554,
+   "blend_home": 0.3412,
+   "best_home": 175,
+   "best_home_book": "BetUS",
+   "best_away": -196,
+   "best_away_book": "FanDuel",
+   "ev_home": -0.0617,
+   "ev_away": -0.0051,
    "total": {
-    "expected": 6.32,
+    "expected": 6.3,
     "pick": null,
-    "line": 6.0,
-    "model_over": 0.5465,
-    "market_over": 0.5325,
-    "blend_over": 0.5374,
-    "push": 0.135,
-    "best_over": -118,
-    "best_over_book": "BetMGM",
-    "best_under": 109,
-    "best_under_book": "LowVig.ag",
-    "ev_over": -0.0062,
-    "ev_under": -0.0287
+    "line": 6.5,
+    "model_over": 0.4709,
+    "market_over": 0.4712,
+    "blend_over": 0.4711,
+    "push": 0.0,
+    "best_over": 105,
+    "best_over_book": "DraftKings",
+    "best_under": -120,
+    "best_under_book": "BetUS",
+    "ev_over": -0.0343,
+    "ev_under": -0.0303
    }
   },
   {
@@ -456,38 +458,38 @@
    "state": "FUT",
    "home_streak": -2,
    "away_streak": 1,
-   "model_home": 0.396,
+   "model_home": 0.388,
    "pick": null,
    "home_goalie": "Kevin Lankinen",
    "home_goalie_status": "Likely",
-   "home_goalie_gsax": -0.37,
-   "home_goalie_swap": -0.141,
-   "away_goalie": "Lukas Dostal",
-   "away_goalie_status": "Reported",
-   "away_goalie_gsax": -0.196,
-   "away_goalie_swap": -0.056,
-   "market_home": 0.417,
-   "blend_home": 0.4065,
-   "best_home": 135,
+   "home_goalie_gsax": -0.361,
+   "home_goalie_swap": -0.14,
+   "away_goalie": "Laurent Brossoit",
+   "away_goalie_status": "Confirmed",
+   "away_goalie_gsax": 0.136,
+   "away_goalie_swap": 0.268,
+   "market_home": 0.3709,
+   "blend_home": 0.3795,
+   "best_home": 165,
    "best_home_book": "BetRivers",
-   "best_away": -150,
-   "best_away_book": "BetUS",
-   "ev_home": -0.0447,
-   "ev_away": -0.0109,
+   "best_away": -183,
+   "best_away_book": "LowVig.ag",
+   "ev_home": 0.0056,
+   "ev_away": -0.0404,
    "total": {
-    "expected": 7.05,
+    "expected": 7.02,
     "pick": null,
     "line": 6.5,
-    "model_over": 0.6062,
-    "market_over": 0.5568,
-    "blend_over": 0.5741,
+    "model_over": 0.6011,
+    "market_over": 0.5613,
+    "blend_over": 0.5752,
     "push": 0.0,
-    "best_over": -135,
-    "best_over_book": "DraftKings",
-    "best_under": 120,
+    "best_over": -138,
+    "best_over_book": "LowVig.ag",
+    "best_under": 128,
     "best_under_book": "BetRivers",
-    "ev_over": -0.0007,
-    "ev_under": -0.063
+    "ev_over": -0.008,
+    "ev_under": -0.0315
    }
   }
  ],
@@ -500,7 +502,7 @@
   "units_staked": 25.9,
   "units_profit": 2.43,
   "roi": 0.0938,
-  "avg_clv": -0.0147,
+  "avg_clv": -0.0149,
   "beat_close_pct": 0.182
  },
  "record_by_market": {
@@ -513,7 +515,7 @@
    "units_staked": 25.9,
    "units_profit": 2.43,
    "roi": 0.0938,
-   "avg_clv": -0.0147,
+   "avg_clv": -0.0149,
    "beat_close_pct": 0.182
   },
   "moneyline": {
@@ -525,7 +527,7 @@
    "units_staked": 25.9,
    "units_profit": 2.43,
    "roi": 0.0938,
-   "avg_clv": -0.0147,
+   "avg_clv": -0.0149,
    "beat_close_pct": 0.182
   },
   "totals": {
@@ -559,8 +561,8 @@
    "ev": 0.0449,
    "stake": 2.0,
    "goalies": "Jesper Wallstedt (Confirmed) @ Dan Vladar (Confirmed)",
-   "close_fair": 0.6197,
-   "clv": -0.0262,
+   "close_fair": 0.6171,
+   "clv": -0.0303,
    "result": null,
    "profit": null
   },
@@ -1043,9 +1045,9 @@
    "goalie_swap_diff"
   ],
   "overall": {
-   "log_loss": 0.6664,
-   "brier": 0.237,
-   "accuracy": 0.5868
+   "log_loss": 0.6665,
+   "brier": 0.2371,
+   "accuracy": 0.585
   },
   "baselines": {
    "always_home_rate": {
@@ -1060,142 +1062,142 @@
    }
   },
   "goalie_effect": {
-   "log_loss_without": 0.6662,
-   "log_loss_with": 0.6664,
+   "log_loss_without": 0.6663,
+   "log_loss_with": 0.6665,
    "helps": false
   },
   "streak_effect": {
-   "log_loss_without_streaks": 0.6663,
-   "log_loss_with_streaks": 0.6664,
+   "log_loss_without_streaks": 0.6664,
+   "log_loss_with_streaks": 0.6665,
    "helps": false
   },
   "per_season": [
    {
     "season": "2022-23",
     "games": 1400,
-    "log_loss": 0.6613,
-    "brier": 0.2345,
-    "accuracy": 0.6
+    "log_loss": 0.6609,
+    "brier": 0.2343,
+    "accuracy": 0.5979
    },
    {
     "season": "2023-24",
     "games": 1400,
-    "log_loss": 0.6588,
+    "log_loss": 0.6587,
     "brier": 0.2334,
     "accuracy": 0.605
    },
    {
     "season": "2024-25",
     "games": 1398,
-    "log_loss": 0.6638,
-    "brier": 0.2359,
-    "accuracy": 0.5858
+    "log_loss": 0.6641,
+    "brier": 0.236,
+    "accuracy": 0.588
    },
    {
     "season": "2025-26",
     "games": 1394,
-    "log_loss": 0.6847,
-    "brier": 0.2459,
-    "accuracy": 0.5481
+    "log_loss": 0.6852,
+    "brier": 0.2461,
+    "accuracy": 0.5423
    },
    {
     "season": "2026-27",
     "games": 235,
-    "log_loss": 0.6473,
-    "brier": 0.228,
-    "accuracy": 0.634
+    "log_loss": 0.6485,
+    "brier": 0.2286,
+    "accuracy": 0.6255
    }
   ],
   "calibration": [
    {
-    "predicted": 0.173,
+    "predicted": 0.172,
     "actual": 0.233,
     "games": 43
    },
    {
-    "predicted": 0.259,
-    "actual": 0.323,
-    "games": 235
+    "predicted": 0.258,
+    "actual": 0.314,
+    "games": 236
    },
    {
     "predicted": 0.358,
-    "actual": 0.397,
-    "games": 639
+    "actual": 0.401,
+    "games": 641
    },
    {
-    "predicted": 0.454,
-    "actual": 0.481,
-    "games": 1406
+    "predicted": 0.453,
+    "actual": 0.484,
+    "games": 1383
    },
    {
-    "predicted": 0.551,
-    "actual": 0.531,
-    "games": 1696
+    "predicted": 0.55,
+    "actual": 0.529,
+    "games": 1717
    },
    {
     "predicted": 0.646,
-    "actual": 0.626,
-    "games": 1191
+    "actual": 0.625,
+    "games": 1189
    },
    {
-    "predicted": 0.741,
-    "actual": 0.731,
-    "games": 501
+    "predicted": 0.74,
+    "actual": 0.73,
+    "games": 500
    },
    {
-    "predicted": 0.828,
-    "actual": 0.852,
-    "games": 115
+    "predicted": 0.827,
+    "actual": 0.846,
+    "games": 117
    }
   ],
   "importance": [
    {
     "feature": "elo_diff",
-    "weight": 0.2676
+    "weight": 0.2686
    },
    {
     "feature": "xg_season_diff",
-    "weight": 0.223
+    "weight": 0.2068
    },
    {
     "feature": "away_b2b",
-    "weight": 0.1207
+    "weight": 0.1211
    },
    {
     "feature": "xg5_l10_diff",
-    "weight": 0.1147
+    "weight": 0.121
    },
    {
     "feature": "home_b2b",
-    "weight": -0.0736
+    "weight": -0.0739
    },
    {
     "feature": "win_l10_diff",
-    "weight": -0.0682
+    "weight": -0.0655
    },
    {
     "feature": "rest_diff",
-    "weight": 0.0396
-   },
-   {
-    "feature": "gd_l10_diff",
-    "weight": -0.0279
+    "weight": 0.0395
    },
    {
     "feature": "gd_season_diff",
-    "weight": 0.0217
+    "weight": 0.0339
+   },
+   {
+    "feature": "gd_l10_diff",
+    "weight": -0.0323
    },
    {
     "feature": "goalie_swap_diff",
-    "weight": 0.0201
+    "weight": 0.0207
    },
    {
     "feature": "xg_l10_diff",
-    "weight": -0.0152
+    "weight": -0.0155
    },
    {
     "feature": "streak_diff",
-    "weight": 0.0019
+    "weight": 0.0016
    }
   ],
   "note": "This measures prediction quality, not betting ROI. Free historical odds aren't available, so real ROI and closing line value are tracked going forward in the bet log."
@@ -1222,65 +1224,65 @@
   "avg_total": 6.22,
   "lines": {
    "5.5": {
-    "log_loss": 0.6827,
+    "log_loss": 0.6829,
     "log_loss_baseline": 0.6838,
     "over_rate": 0.571,
     "calibration": [
      {
-      "predicted": 0.525,
-      "actual": 0.519,
+      "predicted": 0.526,
+      "actual": 0.531,
       "games": 1166
      },
      {
       "predicted": 0.567,
-      "actual": 0.564,
+      "actual": 0.548,
       "games": 1165
      },
      {
       "predicted": 0.593,
-      "actual": 0.559,
+      "actual": 0.563,
       "games": 1165
      },
      {
-      "predicted": 0.62,
-      "actual": 0.59,
+      "predicted": 0.621,
+      "actual": 0.587,
       "games": 1165
      },
      {
-      "predicted": 0.666,
-      "actual": 0.623,
+      "predicted": 0.668,
+      "actual": 0.625,
       "games": 1166
      }
     ]
    },
    "6.5": {
-    "log_loss": 0.6903,
+    "log_loss": 0.6907,
     "log_loss_baseline": 0.6906,
     "over_rate": 0.458,
     "calibration": [
      {
-      "predicted": 0.409,
-      "actual": 0.41,
+      "predicted": 0.41,
+      "actual": 0.408,
       "games": 1166
      },
      {
       "predicted": 0.451,
-      "actual": 0.437,
+      "actual": 0.441,
       "games": 1165
      },
      {
       "predicted": 0.478,
-      "actual": 0.464,
+      "actual": 0.469,
       "games": 1165
      },
      {
-      "predicted": 0.511,
-      "actual": 0.476,
+      "predicted": 0.512,
+      "actual": 0.47,
       "games": 1165
      },
      {
-      "predicted": 0.575,
-      "actual": 0.501,
+      "predicted": 0.579,
+      "actual": 0.5,
       "games": 1166
      }
     ]
