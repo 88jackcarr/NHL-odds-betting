@@ -27,3 +27,6 @@ logged_at,date,game_id,matchup,market,line,pick,side,book,odds,model_prob,market
 2026-11-07 13:42,2026-11-07,2026020274,DET @ COL,ML,,DET,away,BetRivers,195,0.3703,0.3364,0.3533,0.0423,0.5,Daniil Tarasov (Reported) @ Mackenzie Blackwood (Confirmed),0.3414,0.0072,L,-0.5
 2026-11-07 13:42,2026-11-07,2026020276,VAN @ EDM,Total,7.0,Under 7,under,BetMGM,-120,0.667,0.5338,0.5804,0.0481,1.4,Leevi Merilainen (Likely) @ Devon Levi (Confirmed),0.5338,-0.0213,W,1.167
 2026-11-08 14:00,2026-11-08,2026020280,TBL @ WPG,ML,,WPG,home,Bovada,130,0.4732,0.4256,0.4494,0.0337,0.6,Andrei Vasilevskiy (Reported) @ Stuart Skinner (Likely),0.4256,-0.021,W,0.78
+2026-11-09 17:53,2026-11-09,2026020283,NYR @ EDM,ML,,NYR,away,BetRivers,148,0.4653,0.399,0.4322,0.0718,1.2,Dylan Garand (Confirmed) @ Devon Levi (Confirmed),0.399,-0.0104,,
+2026-11-09 17:53,2026-11-09,2026020283,NYR @ EDM,Total,6.5,Under 6.5,under,BetRivers,102,0.5545,0.4946,0.5156,0.0414,1.0,Dylan Garand (Confirmed) @ Devon Levi (Confirmed),0.4946,-0.0009,,
+2026-11-09 17:53,2026-11-09,2026020284,PHI @ VAN,ML,,VAN,home,BetMGM,118,0.6065,0.4486,0.5275,0.15,2.0,Joseph Woll (Likely) @ Leevi Merilainen (Likely),0.4486,-0.0221,,
