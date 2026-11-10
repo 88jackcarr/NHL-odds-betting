@@ -146,7 +146,7 @@ function render(d) {
     ["Record", `${r.wins}-${r.losses}${r.pushes ? `-${r.pushes}` : ""}`], ["Units", signed(r.units_profit, 2), cls(r.units_profit)],
     ["ROI", r.roi == null ? "–" : signed(r.roi * 100) + "%", cls(r.roi)],
     ["Avg CLV", r.avg_clv == null ? "–" : signed(r.avg_clv * 100) + "%", cls(r.avg_clv)],
-    ["Beat close", pct(r.beat_close_pct, 0)], ["Pending", r.pending]
+    ["Beat close", r.clv_bets ? `${pct(r.beat_close_pct, 0)} <span class="muted" style="font-size:13px">of ${r.clv_bets}</span>` : "–"], ["Pending", r.pending]
   ];
   document.getElementById("tiles").innerHTML = tiles.map(([k, v, c = ""]) =>
     `<div class="tile"><div class="k">${k}</div><div class="v ${c}">${v}</div></div>`).join("");
@@ -168,7 +168,7 @@ function render(d) {
     ${bets.map(b => `<tr><td>${b.date}</td><td>${b.matchup}</td><td><b>${b.pick}</b></td>
       <td class="r num">${odds(b.odds)}</td><td class="muted">${b.book}</td>
       <td class="r num">${b.stake}u</td><td class="r num">${pct(b.ev)}</td>
-      <td class="r num ${cls(b.clv)}">${b.clv == null ? "–" : signed(b.clv * 100) + "%"}</td>
+      <td class="r num ${cls(b.clv)}">${b.clv == null || !b.clv_at || (new Date(b.clv_at.replace(" ", "T")) - new Date(b.logged_at.replace(" ", "T"))) < 72e5 ? "–" : signed(b.clv * 100) + "%"}</td>
       <td class="${b.result === "W" ? "good" : b.result === "L" ? "bad" : "muted"}">${b.result === "P" ? "Push" : b.result ?? "Pending"}</td>
       <td class="r num ${cls(b.profit)}">${b.profit == null ? "" : signed(b.profit, 2)}</td></tr>`).join("")}`
     : `<tr><td class="empty">No bets logged yet.</td></tr>`;

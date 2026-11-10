@@ -7,11 +7,13 @@ from .odds import american_to_decimal
 
 BET_COLS = ["logged_at", "date", "game_id", "matchup", "market", "line", "pick", "side",
             "book", "odds",
-            "model_prob", "market_prob", "prob", "ev", "stake", "goalies", "close_fair", "clv",
+            "model_prob", "market_prob", "prob", "ev", "stake", "goalies", "close_fair", "clv", "clv_at",
             "result", "profit"]
 
 
-TEXT_COLS = ["logged_at", "date", "matchup", "market", "pick", "side", "book", "goalies", "result"]
+TEXT_COLS = ["logged_at", "date", "matchup", "market", "pick", "side", "book", "goalies",
+             "clv_at", "result"]
+CLV_MIN_HOURS = 2   # a "closing" snapshot taken sooner than this after the pick doesn't count
 
 
 def _types(bets: pd.DataFrame) -> pd.DataFrame:
@@ -61,7 +63,7 @@ def _total_fair_at(bet_line, side, close, curve):
 
 
 def update_closing(bets: pd.DataFrame, odds_by_game: dict, started: set,
-                   curves: dict | None = None) -> pd.DataFrame:
+                   curves: dict | None = None, now: str | None = None) -> pd.DataFrame:
     """For games not started yet, store the latest consensus fair price and the CLV."""
     curves = curves or {}
     for i, b in bets.iterrows():
@@ -77,10 +79,12 @@ def update_closing(bets: pd.DataFrame, odds_by_game: dict, started: set,
                 continue
             bets.at[i, "close_fair"] = round(fair, 4)
             bets.at[i, "clv"] = round(american_to_decimal(b["odds"]) * fair - 1, 4)
+            bets.at[i, "clv_at"] = now
             continue
         fair = o["market_home"] if b["side"] == "home" else 1 - o["market_home"]
         bets.at[i, "close_fair"] = round(fair, 4)
         bets.at[i, "clv"] = round(american_to_decimal(b["odds"]) * fair - 1, 4)
+        bets.at[i, "clv_at"] = now
     return bets
 
 
@@ -115,7 +119,10 @@ def summary_by_market(bets: pd.DataFrame) -> dict:
 
 def summary(bets: pd.DataFrame) -> dict:
     done = bets.dropna(subset=["result"])
-    clv = bets.dropna(subset=["clv"])
+    clv = bets.dropna(subset=["clv", "clv_at"])
+    if len(clv):   # only snapshots taken well after the pick measure real line movement
+        gap = pd.to_datetime(clv["clv_at"]) - pd.to_datetime(clv["logged_at"])
+        clv = clv[gap >= pd.Timedelta(hours=CLV_MIN_HOURS)]
     staked = float(done.loc[done["result"] != "P", "stake"].sum()) if len(done) else 0.0
     profit = float(done["profit"].sum()) if len(done) else 0.0
     return {
@@ -129,6 +136,7 @@ def summary(bets: pd.DataFrame) -> dict:
         "roi": round(profit / staked, 4) if staked else None,
         "avg_clv": round(float(clv["clv"].mean()), 4) if len(clv) else None,
         "beat_close_pct": round(float((clv["clv"] > 0).mean()), 3) if len(clv) else None,
+        "clv_bets": int(len(clv)),
     }
 
 

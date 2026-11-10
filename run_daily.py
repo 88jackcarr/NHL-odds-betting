@@ -196,7 +196,8 @@ def main(mode: str):
         print(f"  {len(new_bets)} value bets today")
     started = {int(g) for g, s in zip(games["game_id"], games["state"])
                if s not in ("FUT", "PRE")}
-    for step in (lambda b: ledger.update_closing(b, odds_by_game, started, curves),
+    for step in (lambda b: ledger.update_closing(b, odds_by_game, started, curves,
+                                                   now.astimezone(CT).strftime("%Y-%m-%d %H:%M")),
                  lambda b: ledger.grade(b, games)):
         try:
             bets = step(bets)

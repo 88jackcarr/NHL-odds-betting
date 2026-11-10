@@ -4,8 +4,12 @@ on:
   schedule:
     # GitHub uses UTC. 16:00 UTC = 11:00 AM Central (10:00 AM after DST ends).
     - cron: "0 16 * * *"     # morning: retrain, find value, log bets
-    # 22:45 UTC = 5:45 PM Central (4:45 PM after DST ends), before most puck drops.
-    - cron: "45 22 * * *"    # pre-game: near-closing lines for CLV
+    # Pre-game line checks. GitHub often starts scheduled runs 1-5 hours late, so there
+    # are several; each one refreshes the closing line for games that haven't started.
+    - cron: "0 19 * * *"     # 1:00 PM CT
+    - cron: "30 20 * * *"    # 2:30 PM CT
+    - cron: "0 22 * * *"     # 4:00 PM CT
+    - cron: "15 23 * * *"    # 5:15 PM CT
   workflow_dispatch:
     inputs:
       mode:
@@ -39,10 +43,10 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "45 22 * * *" ]; then
-            echo "mode=close" >> "$GITHUB_OUTPUT"
-          else
+          elif [ "${{ github.event.schedule }}" = "0 16 * * *" ]; then
             echo "mode=picks" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=close" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Run model
