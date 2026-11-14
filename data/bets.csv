@@ -37,3 +37,5 @@ logged_at,date,game_id,matchup,market,line,pick,side,book,odds,model_prob,market
 2026-11-12 15:56,2026-11-12,2026020302,DET @ FLA,ML,,DET,away,LowVig.ag,158,0.4388,0.3908,0.4148,0.0702,1.1,John Gibson (Confirmed) @ Akira Schmid (Confirmed),0.3596,-0.0722,2026-11-12 18:05,L,-1.1
 2026-11-12 15:56,2026-11-12,2026020305,BUF @ CHI,ML,,CHI,home,BetRivers,138,0.4477,0.4181,0.4329,0.0302,0.5,Alex Lyon (Reported) @ Spencer Knight (Reported),0.417,-0.0075,2026-11-12 18:05,W,0.69
 2026-11-12 15:56,2026-11-12,2026020307,STL @ UTA,ML,,UTA,home,DraftKings,110,0.526,0.4615,0.4938,0.037,0.8,Joel Hofer (Confirmed) @ Karel Vejmelka (Likely),0.4629,-0.028,2026-11-12 19:21,L,-0.8
+2026-11-14 14:11,2026-11-14,2026020315,COL @ MTL,ML,,COL,away,BetOnline.ag,119,0.5694,0.4474,0.5084,0.1134,2.0,Mackenzie Blackwood (Confirmed) @ Jakub Dobes (Confirmed),0.4474,-0.0202,2026-11-14 14:11,,
+2026-11-14 14:11,2026-11-14,2026020323,SJS @ UTA,ML,,UTA,home,FanDuel,-178,0.7107,0.6211,0.6659,0.04,1.8,Yaroslav Askarov (Confirmed) @ Karel Vejmelka (Likely),0.6211,-0.03,2026-11-14 14:11,,
