@@ -1,5 +1,5 @@
 {
- "updated": "Fri Nov 13, 6:17 PM CT",
+ "updated": "Fri Nov 13, 6:58 PM CT",
  "run": "close",
  "date": "2026-11-13",
  "has_odds": true,
@@ -10,7 +10,7 @@
   "Goalies: Daily Faceoff listed starters for 4 teams.",
   "Odds: loaded 16 NHL games with prices (16 listed by the API), 16 with over/under lines."
  ],
- "odds_credits_left": "431",
+ "odds_credits_left": "429",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
@@ -40,14 +40,14 @@
    "away_goalie_status": "Confirmed",
    "away_goalie_gsax": 0.22,
    "away_goalie_swap": 0.088,
-   "market_home": 0.3468,
-   "blend_home": 0.3202,
+   "market_home": 0.3478,
+   "blend_home": 0.3208,
    "best_home": 185,
    "best_home_book": "DraftKings",
    "best_away": -205,
    "best_away_book": "LowVig.ag",
-   "ev_home": -0.0873,
-   "ev_away": 0.0113,
+   "ev_home": -0.0858,
+   "ev_away": 0.0106,
    "total": {
     "expected": 6.33,
     "pick": null,
@@ -56,11 +56,11 @@
     "market_over": 0.4889,
     "blend_over": 0.4888,
     "push": 0.0,
-    "best_over": 100,
-    "best_over_book": "FanDuel",
+    "best_over": -102,
+    "best_over_book": "BetMGM",
     "best_under": -113,
     "best_under_book": "LowVig.ag",
-    "ev_over": -0.0225,
+    "ev_over": -0.0321,
     "ev_under": -0.0363
    }
   },
