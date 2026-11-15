@@ -1,5 +1,5 @@
 {
- "updated": "Sun Nov 15, 2:32 PM CT",
+ "updated": "Sun Nov 15, 2:38 PM CT",
  "run": "picks",
  "date": "2026-11-15",
  "has_odds": true,
@@ -10,7 +10,7 @@
   "Goalies: Daily Faceoff listed starters for 10 teams.",
   "Odds: loaded 7 NHL games with prices (7 listed by the API), 7 with over/under lines."
  ],
- "odds_credits_left": "413",
+ "odds_credits_left": "411",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
