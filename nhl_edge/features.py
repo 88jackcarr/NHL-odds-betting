@@ -215,4 +215,7 @@ def build_features(games: pd.DataFrame, xg: pd.DataFrame | None = None,
             h.update(gdate, hg, ag, xg_lookup.get((int(g.game_id), g.home)))
             a.update(gdate, ag, hg, xg_lookup.get((int(g.game_id), g.away)))
         rows.append(row)
+        # Count rest from every scheduled game, including ones still in progress,
+        # so a team playing tonight is on a back-to-back tomorrow.
+        h.last_date = a.last_date = gdate
     return pd.DataFrame(rows)
