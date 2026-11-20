@@ -43,4 +43,4 @@ logged_at,date,game_id,matchup,market,line,pick,side,book,odds,model_prob,market
 2026-11-16 09:27,2026-11-16,2026020332,VAN @ UTA,ML,,UTA,home,BetMGM,-325,0.8374,0.7409,0.7891,0.032,2.0,Nikita Tolopilo (Reported) @ Sebastian Cossa (Reported),0.7415,-0.0303,2026-11-16 20:25,L,-2.0
 2026-11-18 16:44,2026-11-18,2026020344,BOS @ DET,ML,,DET,home,LowVig.ag,-105,0.5777,0.4968,0.5373,0.0489,1.3,Jeremy Swayman (Reported) @ Daniil Tarasov (Confirmed),0.4968,-0.0301,2026-11-18 16:44,L,-1.3
 2026-11-18 23:01,2026-11-19,2026020352,MTL @ CAR,ML,,CAR,home,MyBookie.ag,-244,0.8111,0.7006,0.7558,0.0656,2.0,Jakub Dobes (Confirmed) @ Pyotr Kochetkov (Reported),0.7376,0.0399,2026-11-19 16:48,,
-2026-11-18 23:03,2026-11-19,2026020356,ANA @ COL,ML,,COL,home,BetOnline.ag,-143,0.6421,0.5721,0.6071,0.0316,1.1,Lukas Dostal (Reported) @ Mackenzie Blackwood (Reported),0.5395,-0.0832,2026-11-19 16:48,,
+2026-11-18 23:03,2026-11-19,2026020356,ANA @ COL,ML,,COL,home,BetOnline.ag,-143,0.6421,0.5721,0.6071,0.0316,1.1,Lukas Dostal (Reported) @ Mackenzie Blackwood (Reported),0.5427,-0.0777,2026-11-19 19:10,,
