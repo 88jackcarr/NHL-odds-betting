@@ -44,6 +44,6 @@ logged_at,date,game_id,matchup,market,line,pick,side,book,odds,model_prob,market
 2026-11-18 16:44,2026-11-18,2026020344,BOS @ DET,ML,,DET,home,LowVig.ag,-105,0.5777,0.4968,0.5373,0.0489,1.3,Jeremy Swayman (Reported) @ Daniil Tarasov (Confirmed),0.4968,-0.0301,2026-11-18 16:44,L,-1.3
 2026-11-18 23:01,2026-11-19,2026020352,MTL @ CAR,ML,,CAR,home,MyBookie.ag,-244,0.8111,0.7006,0.7558,0.0656,2.0,Jakub Dobes (Confirmed) @ Pyotr Kochetkov (Reported),0.7376,0.0399,2026-11-19 16:48,L,-2.0
 2026-11-18 23:03,2026-11-19,2026020356,ANA @ COL,ML,,COL,home,BetOnline.ag,-143,0.6421,0.5721,0.6071,0.0316,1.1,Lukas Dostal (Reported) @ Mackenzie Blackwood (Reported),0.5466,-0.0712,2026-11-19 19:50,W,0.769
-2026-11-21 15:15,2026-11-21,2026020367,NYI @ DET,ML,,DET,home,FanDuel,114,0.5479,0.4573,0.5026,0.0755,1.7,Ilya Sorokin (Likely) @ John Gibson (Confirmed),0.4573,-0.0215,2026-11-21 15:15,,
-2026-11-21 15:15,2026-11-21,2026020369,VGK @ WPG,ML,,VGK,away,BetUS,-125,0.6115,0.5514,0.5815,0.0467,1.5,Carter Hart (Reported) @ Stuart Skinner (Confirmed),0.5514,-0.0074,2026-11-21 15:15,,
-2026-11-21 15:15,2026-11-21,2026020370,ANA @ UTA,ML,,UTA,home,LowVig.ag,-160,0.6795,0.5973,0.6384,0.0374,1.5,Ville Husso (Confirmed) @ Sebastian Cossa (Likely),0.5973,-0.0294,2026-11-21 15:15,,
+2026-11-21 15:15,2026-11-21,2026020367,NYI @ DET,ML,,DET,home,FanDuel,114,0.5479,0.4573,0.5026,0.0755,1.7,Ilya Sorokin (Likely) @ John Gibson (Confirmed),0.4573,-0.0215,2026-11-21 17:44,,
+2026-11-21 15:15,2026-11-21,2026020369,VGK @ WPG,ML,,VGK,away,BetUS,-125,0.6115,0.5514,0.5815,0.0467,1.5,Carter Hart (Reported) @ Stuart Skinner (Confirmed),0.5564,0.0016,2026-11-21 17:44,,
+2026-11-21 15:15,2026-11-21,2026020370,ANA @ UTA,ML,,UTA,home,LowVig.ag,-160,0.6795,0.5973,0.6384,0.0374,1.5,Ville Husso (Confirmed) @ Sebastian Cossa (Likely),0.5973,-0.0294,2026-11-21 17:44,,
