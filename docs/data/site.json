@@ -1,5 +1,5 @@
 {
- "updated": "Fri Nov 20, 6:44 PM CT",
+ "updated": "Fri Nov 20, 7:39 PM CT",
  "run": "close",
  "date": "2026-11-20",
  "has_odds": true,
@@ -9,7 +9,7 @@
   "Goalies: starter known for 100% of recent games (needs 75% to be used).",
   "Odds: loaded 14 NHL games with prices (14 listed by the API), 14 with over/under lines."
  ],
- "odds_credits_left": "351",
+ "odds_credits_left": "349",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
