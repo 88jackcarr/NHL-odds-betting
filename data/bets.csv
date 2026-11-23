@@ -47,4 +47,4 @@ logged_at,date,game_id,matchup,market,line,pick,side,book,odds,model_prob,market
 2026-11-21 15:15,2026-11-21,2026020367,NYI @ DET,ML,,DET,home,FanDuel,114,0.5479,0.4573,0.5026,0.0755,1.7,Ilya Sorokin (Likely) @ John Gibson (Confirmed),0.4573,-0.0215,2026-11-21 17:44,L,-1.7
 2026-11-21 15:15,2026-11-21,2026020369,VGK @ WPG,ML,,VGK,away,BetUS,-125,0.6115,0.5514,0.5815,0.0467,1.5,Carter Hart (Reported) @ Stuart Skinner (Confirmed),0.5564,0.0016,2026-11-21 17:44,W,1.2
 2026-11-21 15:15,2026-11-21,2026020370,ANA @ UTA,ML,,UTA,home,LowVig.ag,-160,0.6795,0.5973,0.6384,0.0374,1.5,Ville Husso (Confirmed) @ Sebastian Cossa (Likely),0.5721,-0.0704,2026-11-21 19:54,W,0.938
-2026-11-22 15:21,2026-11-22,2026020374,BUF @ TBL,ML,,TBL,home,BetOnline.ag,-195,0.722,0.6418,0.6819,0.0316,1.5,Ukko-Pekka Luukkonen (Reported) @ Dennis Hildeby (Confirmed),0.6418,-0.0291,2026-11-22 15:21,,
+2026-11-22 15:21,2026-11-22,2026020374,BUF @ TBL,ML,,TBL,home,BetOnline.ag,-195,0.722,0.6418,0.6819,0.0316,1.5,Ukko-Pekka Luukkonen (Reported) @ Dennis Hildeby (Confirmed),0.6418,-0.0291,2026-11-22 15:21,L,-1.5
