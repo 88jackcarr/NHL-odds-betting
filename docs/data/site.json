@@ -1,18 +1,16 @@
 {
- "updated": "Tue Nov 24, 6:11 PM CT",
- "run": "picks",
+ "updated": "Tue Nov 24, 8:59 PM CT",
+ "run": "close",
  "date": "2026-11-24",
- "has_odds": true,
+ "has_odds": false,
  "diagnostics": [
-  "xG: MoneyPuck failed for 1 teams, e.g. NYI: RuntimeError no MoneyPuck file found",
-  "xG: loaded MoneyPuck data for 32 teams (latest game id 2026020384).",
-  "xG: used saved data for 1 teams (NYI).",
+  "xG: loaded MoneyPuck data for 33 teams (latest game id 2026020384).",
   "xG coverage of recent games: 100% (needs 75% to be used).",
   "Goalies: starter known for 100% of recent games (needs 75% to be used).",
   "Goalies: Daily Faceoff listed starters for 2 teams.",
-  "Odds: loaded 15 NHL games with prices (15 listed by the API), 15 with over/under lines."
+  "Odds: The Odds API returned error 502: Internal Server Error (key length 32)."
  ],
- "odds_credits_left": "313",
+ "odds_credits_left": null,
  "xg_used": true,
  "goalies_used": true,
  "settings": {
@@ -29,7 +27,7 @@
    "time": "7:00 PM",
    "home": "EDM",
    "away": "VGK",
-   "state": "FUT",
+   "state": "LIVE",
    "home_streak": -3,
    "away_streak": 1,
    "model_home": 0.4372,
@@ -39,38 +37,12 @@
    "home_goalie_gsax": 0.064,
    "home_goalie_swap": 0.065,
    "away_goalie": "Carter Hart",
-   "away_goalie_status": "Likely",
+   "away_goalie_status": "Confirmed",
    "away_goalie_gsax": -0.125,
    "away_goalie_swap": 0.004,
-   "market_home": 0.4783,
-   "blend_home": 0.4577,
-   "best_home": 110,
-   "best_home_book": "BetRivers",
-   "best_away": -120,
-   "best_away_book": "BetUS",
-   "ev_home": -0.0388,
-   "ev_away": -0.0058,
    "total": {
     "expected": 6.13,
-    "pick": {
-     "label": "Under 6.5",
-     "side": "under",
-     "odds": 110,
-     "ev": 0.0473,
-     "stake": 1.1,
-     "book": "BetMGM"
-    },
-    "line": 6.5,
-    "model_over": 0.4434,
-    "market_over": 0.5325,
-    "blend_over": 0.5013,
-    "push": 0.0,
-    "best_over": -114,
-    "best_over_book": "BetRivers",
-    "best_under": 110,
-    "best_under_book": "BetMGM",
-    "ev_over": -0.059,
-    "ev_under": 0.0473
+    "pick": null
    }
   }
  ],
