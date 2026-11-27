@@ -1,17 +1,17 @@
 {
- "updated": "Wed Nov 25, 11:06 PM CT",
- "run": "close",
+ "updated": "Thu Nov 26, 6:08 PM CT",
+ "run": "picks",
  "date": "2026-11-26",
  "has_odds": true,
  "diagnostics": [
   "xG: MoneyPuck failed for 1 teams, e.g. NYI: RuntimeError no MoneyPuck file found",
-  "xG: loaded MoneyPuck data for 32 teams (latest game id 2026020385).",
+  "xG: loaded MoneyPuck data for 32 teams (latest game id 2026020399).",
   "xG: used saved data for 1 teams (NYI).",
-  "xG coverage of recent games: 99% (needs 75% to be used).",
+  "xG coverage of recent games: 100% (needs 75% to be used).",
   "Goalies: starter known for 100% of recent games (needs 75% to be used).",
-  "Odds: loaded 18 NHL games with prices (18 listed by the API), 18 with over/under lines."
+  "Odds: loaded 15 NHL games with prices (15 listed by the API), 15 with over/under lines."
  ],
- "odds_credits_left": "295",
+ "odds_credits_left": "293",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
@@ -24,41 +24,41 @@
  },
  "games": [],
  "record": {
-  "bets": 54,
-  "pending": 2,
-  "wins": 27,
+  "bets": 56,
+  "pending": 0,
+  "wins": 29,
   "pushes": 0,
   "losses": 27,
-  "units_staked": 69.2,
-  "units_profit": -4.59,
-  "roi": -0.0664,
+  "units_staked": 72.2,
+  "units_profit": -2.09,
+  "roi": -0.0289,
   "avg_clv": -0.0213,
   "beat_close_pct": 0.222,
   "clv_bets": 18
  },
  "record_by_market": {
   "all": {
-   "bets": 54,
-   "pending": 2,
-   "wins": 27,
+   "bets": 56,
+   "pending": 0,
+   "wins": 29,
    "pushes": 0,
    "losses": 27,
-   "units_staked": 69.2,
-   "units_profit": -4.59,
-   "roi": -0.0664,
+   "units_staked": 72.2,
+   "units_profit": -2.09,
+   "roi": -0.0289,
    "avg_clv": -0.0213,
    "beat_close_pct": 0.222,
    "clv_bets": 18
   },
   "moneyline": {
-   "bets": 51,
-   "pending": 2,
-   "wins": 25,
+   "bets": 53,
+   "pending": 0,
+   "wins": 27,
    "pushes": 0,
    "losses": 26,
-   "units_staked": 65.7,
-   "units_profit": -5.68,
-   "roi": -0.0865,
+   "units_staked": 68.7,
+   "units_profit": -3.17,
+   "roi": -0.0462,
    "avg_clv": -0.0213,
    "beat_close_pct": 0.222,
    "clv_bets": 18
@@ -98,8 +98,8 @@
    "close_fair": 0.552,
    "clv": -0.0234,
    "clv_at": "2026-11-25 20:58",
-   "result": null,
-   "profit": null
+   "result": "W",
+   "profit": 0.769
   },
   {
    "logged_at": "2026-11-25 17:50",
@@ -121,8 +121,8 @@
    "close_fair": 0.5217,
    "clv": -0.0246,
    "clv_at": "2026-11-25 20:07",
-   "result": null,
-   "profit": null
+   "result": "W",
+   "profit": 1.739
   },
   {
    "logged_at": "2026-11-25 17:50",
@@ -1405,7 +1405,7 @@
    "helps": false
   },
   "streak_effect": {
-   "log_loss_without_streaks": 0.6664,
+   "log_loss_without_streaks": 0.6663,
    "log_loss_with_streaks": 0.6664,
    "helps": false
   },
@@ -1440,10 +1440,10 @@
    },
    {
     "season": "2026-27",
-    "games": 396,
-    "log_loss": 0.6561,
-    "brier": 0.2318,
-    "accuracy": 0.6212
+    "games": 399,
+    "log_loss": 0.6559,
+    "brier": 0.2317,
+    "accuracy": 0.6216
    }
   ],
   "calibration": [
@@ -1475,7 +1475,7 @@
    {
     "predicted": 0.646,
     "actual": 0.627,
-    "games": 1224
+    "games": 1227
    },
    {
     "predicted": 0.741,
@@ -1491,51 +1491,51 @@
   "importance": [
    {
     "feature": "elo_diff",
-    "weight": 0.2703
+    "weight": 0.2701
    },
    {
     "feature": "xg_season_diff",
-    "weight": 0.2268
+    "weight": 0.2278
    },
    {
     "feature": "away_b2b",
-    "weight": 0.1222
+    "weight": 0.1213
    },
    {
     "feature": "xg5_l10_diff",
-    "weight": 0.1042
+    "weight": 0.1038
    },
    {
     "feature": "win_l10_diff",
-    "weight": -0.0818
+    "weight": -0.0827
    },
    {
     "feature": "home_b2b",
-    "weight": -0.0723
+    "weight": -0.0716
    },
    {
     "feature": "rest_diff",
-    "weight": 0.0366
+    "weight": 0.0381
    },
    {
     "feature": "gd_l10_diff",
-    "weight": -0.0241
+    "weight": -0.0225
    },
    {
     "feature": "goalie_swap_diff",
-    "weight": 0.0195
+    "weight": 0.0196
    },
    {
     "feature": "gd_season_diff",
-    "weight": 0.017
+    "weight": 0.0157
    },
    {
     "feature": "streak_diff",
-    "weight": 0.0062
+    "weight": 0.0063
    },
    {
     "feature": "xg_l10_diff",
-    "weight": -0.0019
+    "weight": -0.0018
    }
   ],
   "note": "This measures prediction quality, not betting ROI. Free historical odds aren't available, so real ROI and closing line value are tracked going forward in the bet log."
@@ -1558,7 +1558,7 @@
    "away_xgf",
    "away_xga"
   ],
-  "games": 5988,
+  "games": 5991,
   "avg_total": 6.23,
   "lines": {
    "5.5": {
@@ -1568,23 +1568,23 @@
     "calibration": [
      {
       "predicted": 0.526,
-      "actual": 0.519,
-      "games": 1198
+      "actual": 0.52,
+      "games": 1199
      },
      {
       "predicted": 0.567,
       "actual": 0.564,
-      "games": 1197
+      "games": 1198
      },
      {
       "predicted": 0.593,
-      "actual": 0.562,
+      "actual": 0.561,
       "games": 1198
      },
      {
       "predicted": 0.62,
       "actual": 0.591,
-      "games": 1197
+      "games": 1198
      },
      {
       "predicted": 0.665,
@@ -1595,18 +1595,18 @@
    },
    "6.5": {
     "log_loss": 0.6904,
-    "log_loss_baseline": 0.6907,
+    "log_loss_baseline": 0.6906,
     "over_rate": 0.459,
     "calibration": [
      {
       "predicted": 0.41,
       "actual": 0.415,
-      "games": 1198
+      "games": 1199
      },
      {
       "predicted": 0.451,
       "actual": 0.436,
-      "games": 1197
+      "games": 1198
      },
      {
       "predicted": 0.478,
@@ -1616,7 +1616,7 @@
      {
       "predicted": 0.511,
       "actual": 0.477,
-      "games": 1197
+      "games": 1198
      },
      {
       "predicted": 0.574,
