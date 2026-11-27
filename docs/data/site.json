@@ -1,17 +1,15 @@
 {
- "updated": "Thu Nov 26, 6:08 PM CT",
- "run": "picks",
+ "updated": "Thu Nov 26, 8:06 PM CT",
+ "run": "close",
  "date": "2026-11-26",
  "has_odds": true,
  "diagnostics": [
-  "xG: MoneyPuck failed for 1 teams, e.g. NYI: RuntimeError no MoneyPuck file found",
-  "xG: loaded MoneyPuck data for 32 teams (latest game id 2026020399).",
-  "xG: used saved data for 1 teams (NYI).",
+  "xG: loaded MoneyPuck data for 33 teams (latest game id 2026020399).",
   "xG coverage of recent games: 100% (needs 75% to be used).",
   "Goalies: starter known for 100% of recent games (needs 75% to be used).",
   "Odds: loaded 15 NHL games with prices (15 listed by the API), 15 with over/under lines."
  ],
- "odds_credits_left": "293",
+ "odds_credits_left": "291",
  "xg_used": true,
  "goalies_used": true,
  "settings": {
