@@ -55,3 +55,6 @@ logged_at,date,game_id,matchup,market,line,pick,side,book,odds,model_prob,market
 2026-11-25 17:50,2026-11-25,2026020395,NSH @ DAL,ML,,NSH,away,LowVig.ag,149,0.4401,0.3962,0.4182,0.0413,0.7,Juuse Saros (Reported) @ Jake Oettinger (Confirmed),0.3962,-0.0134,2026-11-25 17:50,W,1.043
 2026-11-25 17:50,2026-11-25,2026020397,MTL @ COL,ML,,COL,home,BetUS,-115,0.6275,0.5226,0.575,0.0751,2.0,Jacob Fowler (Confirmed) @ Mackenzie Blackwood (Confirmed),0.5217,-0.0246,2026-11-25 20:07,W,1.739
 2026-11-25 17:50,2026-11-25,2026020398,SJS @ ANA,ML,,ANA,home,FanDuel,-130,0.614,0.5526,0.5833,0.032,1.0,Alex Nedeljkovic (Confirmed) @ Laurent Brossoit (Confirmed),0.552,-0.0234,2026-11-25 20:58,W,0.769
+2026-11-27 12:24,2026-11-27,2026020403,DAL @ STL,ML,,STL,home,LowVig.ag,113,0.5143,0.4573,0.4858,0.0347,0.8,J. Oettinger (Projected) @ J. Hofer (Projected),0.4573,-0.026,2026-11-27 12:24,,
+2026-11-27 12:24,2026-11-27,2026020406,FLA @ WSH,ML,,WSH,home,Bovada,105,0.5609,0.4774,0.5192,0.0643,1.5,J. Markstrom (Projected) @ L. Thompson (Projected),0.4774,-0.0213,2026-11-27 12:24,,
+2026-11-27 12:24,2026-11-27,2026020414,SEA @ EDM,ML,,SEA,away,BetRivers,180,0.391,0.3474,0.3692,0.0338,0.5,P. Grubauer (Projected) @ D. Levi (Projected),0.3474,-0.0272,2026-11-27 12:24,,
