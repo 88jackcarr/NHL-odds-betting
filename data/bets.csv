@@ -57,4 +57,4 @@ logged_at,date,game_id,matchup,market,line,pick,side,book,odds,model_prob,market
 2026-11-25 17:50,2026-11-25,2026020398,SJS @ ANA,ML,,ANA,home,FanDuel,-130,0.614,0.5526,0.5833,0.032,1.0,Alex Nedeljkovic (Confirmed) @ Laurent Brossoit (Confirmed),0.552,-0.0234,2026-11-25 20:58,W,0.769
 2026-11-27 12:24,2026-11-27,2026020403,DAL @ STL,ML,,STL,home,LowVig.ag,113,0.5143,0.4573,0.4858,0.0347,0.8,J. Oettinger (Projected) @ J. Hofer (Projected),0.4573,-0.026,2026-11-27 12:24,W,0.904
 2026-11-27 12:24,2026-11-27,2026020406,FLA @ WSH,ML,,WSH,home,Bovada,105,0.5609,0.4774,0.5192,0.0643,1.5,J. Markstrom (Projected) @ L. Thompson (Projected),0.4774,-0.0213,2026-11-27 12:24,L,-1.5
-2026-11-27 12:24,2026-11-27,2026020414,SEA @ EDM,ML,,SEA,away,BetRivers,180,0.391,0.3474,0.3692,0.0338,0.5,P. Grubauer (Projected) @ D. Levi (Projected),0.3468,-0.0291,2026-11-27 17:47,,
+2026-11-27 12:24,2026-11-27,2026020414,SEA @ EDM,ML,,SEA,away,BetRivers,180,0.391,0.3474,0.3692,0.0338,0.5,P. Grubauer (Projected) @ D. Levi (Projected),0.3468,-0.0291,2026-11-27 17:47,W,0.9
